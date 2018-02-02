@@ -91,6 +91,8 @@ namespace AngleTool
             richTextBoxAdvance.SelectionLength = 0;
             */
             this.Text += " V " + version;
+
+            timer1.Enabled = true;
         }
 
         private void linkLabelReduction_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -192,13 +194,125 @@ namespace AngleTool
         private void FormMain_Shown(object sender, EventArgs e)
         {
             this.Show();
-            backgroundWorkerAuto.RunWorkerAsync();
         }
 
         private void backgroundWorkerAuto_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            normalLog("1/N：检查Hosts……");
 
+        }
+
+        private void buttonFlex_Click(object sender, EventArgs e)
+        {
+            buttonFlex.Enabled = false;
+            if (buttonFlex.Text.Equals("打开天使排班"))
+            {
+                Process pro = new Process();
+                pro.StartInfo.FileName = "chrome.exe";
+                pro.StartInfo.Arguments = @"https://mch.hoswork.com/mch/index.html#/wxlogin";
+                pro.Start();
+            }
+            else
+            {
+                if (stepAll())
+                {
+                    normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
+                    buttonFlex.Enabled = true;
+                    buttonFlex.Text = "打开天使排班";
+                }
+            }
+
+            buttonFlex.Enabled = true;
+        }
+
+        private bool stepSetHosts()
+        {
+            buttonFlex.Enabled = false;
+            normalLog("1/4：准备优化Hosts……");
+
+            string result = HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
+                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
+                HospitalCustomizedConfig.hostsVersion);
+            if (!result.Equals("设置Hosts成功") && !result.Equals("hosts已经处于优化状态"))
+            {
+                normalLog("1/4：" + result);
+                buttonFlex.Enabled = true;
+                return false;
+
+            }
+            normalLog("1/4：" + result);
+            return true;
+        }
+
+        private bool stepInstallChrome()
+        {
+            normalLog("2/4：检查是否已安装谷歌浏览器……");
+
+            if (!BrowerConfiger.hasChromeInstalled())
+            {
+                normalLog("2/4：您尚未安装谷歌浏览器，请在弹窗中选择是否下载安装。请于安装后点击按钮继续");
+                // 打开下载窗口
+                FormDownLoadProgressBar formDownLoadProgressBar = new FormDownLoadProgressBar();
+                formDownLoadProgressBar.ShowDialog();
+                buttonFlex.Enabled = true;
+                return false;
+            }
+
+            normalLog("2/4：谷歌浏览器已安装");
+            return true;
+        }
+
+        private bool stepSetDefaultBrowser()
+        {
+            buttonFlex.Enabled = false;
+            normalLog("3/4：设置谷歌浏览器为默认浏览器……");
+
+            // 判断当前是否是谷歌浏览器
+            if (BrowerConfiger.getDefaultBrowerPath().Contains("chrome"))
+            {
+                normalLog("3/4：当前默认浏览器已经是谷歌浏览器");
+                return true;
+            }
+
+            string setBrowerResult = BrowerConfiger.setDefaultBrower();
+            if (!setBrowerResult.Equals("设置成功"))
+            {
+                normalLog("3/4：" + setBrowerResult);
+                buttonFlex.Enabled = true;
+                return false;
+            }
+            normalLog("3/4：" + setBrowerResult);
+            return true;
+        }
+
+        private bool stepAll()
+        {
+            if (!stepSetHosts())
+            {
+                return false;
+            }
+
+            if (!stepInstallChrome())
+            {
+                return false;
+            }
+
+            if (!stepSetDefaultBrowser())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (stepAll())
+            {
+                normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
+                buttonFlex.Enabled = true;
+                buttonFlex.Text = "打开天使排班";
+            }
+            timer1.Enabled = false;
         }
     }
 }

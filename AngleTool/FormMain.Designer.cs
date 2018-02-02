@@ -30,6 +30,7 @@ namespace AngleTool
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnOpti = new System.Windows.Forms.Button();
             this.richTextBoxAdvance = new System.Windows.Forms.RichTextBox();
@@ -49,7 +50,7 @@ namespace AngleTool
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.richTextBoxNormal = new System.Windows.Forms.RichTextBox();
-            this.backgroundWorkerAuto = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelCenter.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -172,8 +173,9 @@ namespace AngleTool
             this.buttonFlex.Name = "buttonFlex";
             this.buttonFlex.Size = new System.Drawing.Size(172, 37);
             this.buttonFlex.TabIndex = 14;
-            this.buttonFlex.Text = "机动按钮";
+            this.buttonFlex.Text = "继续";
             this.buttonFlex.UseVisualStyleBackColor = true;
+            this.buttonFlex.Click += new System.EventHandler(this.buttonFlex_Click);
             // 
             // linkLabelAdvance
             // 
@@ -239,14 +241,15 @@ namespace AngleTool
             // 
             this.richTextBoxNormal.Location = new System.Drawing.Point(283, 99);
             this.richTextBoxNormal.Name = "richTextBoxNormal";
+            this.richTextBoxNormal.ReadOnly = true;
             this.richTextBoxNormal.Size = new System.Drawing.Size(39, 36);
             this.richTextBoxNormal.TabIndex = 13;
             this.richTextBoxNormal.Text = "";
             this.richTextBoxNormal.TextChanged += new System.EventHandler(this.richTextBoxLog_TextChanged);
             // 
-            // backgroundWorkerAuto
+            // timer1
             // 
-            this.backgroundWorkerAuto.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerAuto_DoWork);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormMain
             // 
@@ -291,7 +294,7 @@ namespace AngleTool
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBoxNormal;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerAuto;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

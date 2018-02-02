@@ -118,7 +118,7 @@ namespace AngleToolHelper
 
                 // 复制修改过的hosts文件到原目录
                 File.Copy(tempHostsFileName, systemHostsFileName, true);
-                return "修改系统hosts成功！\n您可以打开目录查看：" + systemHostsFileName + "\n";
+                return "设置Hosts成功";
             }
             catch (Exception exception)
             {
