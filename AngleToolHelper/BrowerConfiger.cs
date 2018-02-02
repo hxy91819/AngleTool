@@ -96,13 +96,13 @@ namespace AngleToolHelper
             {
                 RegistryKey root = Registry.ClassesRoot;
                 RegistryKey httpCommand = root.OpenSubKey(@"http\shell\open\command\", true);
-                httpCommand.SetValue(string.Empty, getDefaultBrowerValue(@"http\shell\open\command\", chromeInstallPath));
+                httpCommand.SetValue(string.Empty, getDefaultBrowerValue(@"http\shell\open\command\", chromeInstallPath, false));
                 
                 RegistryKey httpsCommand = root.OpenSubKey(@"https\shell\open\command\", true);
-                httpsCommand.SetValue(string.Empty, getDefaultBrowerValue(@"https\shell\open\command\", chromeInstallPath));
+                httpsCommand.SetValue(string.Empty, getDefaultBrowerValue(@"https\shell\open\command\", chromeInstallPath, false));
 
                 RegistryKey htmlFilecommand = root.OpenSubKey(@"htmlfile\shell\open\command\", true);
-                htmlFilecommand.SetValue(string.Empty, getDefaultBrowerValue(@"htmlfile\shell\open\command\", chromeInstallPath));
+                htmlFilecommand.SetValue(string.Empty, getDefaultBrowerValue(@"htmlfile\shell\open\command\", chromeInstallPath, false));
             }
             catch (Exception e)
             {
@@ -120,26 +120,48 @@ namespace AngleToolHelper
         /// <returns></returns>
         private static string getDefaultBrowerValue(string rootSubKey, string browerInstallPath)
         {
+            // 默认保留原参数
+            return getDefaultBrowerValue(rootSubKey, browerInstallPath, true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rootSubKey"></param>
+        /// <param name="browerInstallPath"></param>
+        /// <param name="keepLastParameters">是否保留原参数</param>
+        /// <returns></returns>
+        private static string getDefaultBrowerValue(string rootSubKey, string browerInstallPath, Boolean keepLastParameters)
+        {
             RegistryKey root = Registry.ClassesRoot;
             RegistryKey command = root.OpenSubKey(rootSubKey);
             string defaultBrowerPath = command.GetValue(string.Empty).ToString();
             string[] paths = defaultBrowerPath.Split('"');
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < paths.Length; i++)
+            if (keepLastParameters)
             {
-                if (i == 0)
+                for (int i = 0; i < paths.Length; i++)
                 {
-                    continue;
-                }
-                else if (i == 1)
-                {
-                    sb.Append("\"").Append(browerInstallPath);
-                }
-                else
-                {
-                    sb.Append("\"").Append(paths[i]);
+                    if (i == 0)
+                    {
+                        continue;
+                    }
+                    else if (i == 1)
+                    {
+                        sb.Append("\"").Append(browerInstallPath);
+                    }
+                    else
+                    {
+                        sb.Append("\"").Append(paths[i]);
+                    }
                 }
             }
+            else
+            {
+                // 使用chrome标准的参数配置替换原配置
+                sb.Append("\"").Append(browerInstallPath).Append("\" -- \"%1\"");
+            }
+
             return sb.ToString();
         }
 

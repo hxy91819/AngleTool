@@ -1,0 +1,7 @@
+E:\csharpcode\AngleTool\AngleToolHelper\bin\Release\AngleToolHelper.dll
+E:\csharpcode\AngleTool\AngleToolHelper\bin\Release\AngleToolHelper.pdb
+E:\csharpcode\AngleTool\AngleToolHelper\bin\Release\Helpers.dll
+E:\csharpcode\AngleTool\AngleToolHelper\bin\Release\Helpers.pdb
+E:\csharpcode\AngleTool\AngleToolHelper\obj\Release\AngleToolHelper.csprojResolveAssemblyReference.cache
+E:\csharpcode\AngleTool\AngleToolHelper\obj\Release\AngleToolHelper.dll
+E:\csharpcode\AngleTool\AngleToolHelper\obj\Release\AngleToolHelper.pdb

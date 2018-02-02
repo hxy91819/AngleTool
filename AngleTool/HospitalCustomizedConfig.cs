@@ -29,5 +29,10 @@ namespace AngleTool
                     "59.63.235.19 rescdn.qqmail.com", "175.6.26.201 p0xytndy5.bkt.clouddn.com",
                     "47.95.64.126 www.ncqis.cn",
                     regionEnd };
+
+        /// <summary>
+        /// 粤北版本
+        /// </summary>
+        public static string version = "1.0.0.2.yuebei";
     }
 }

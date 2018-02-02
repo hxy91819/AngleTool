@@ -13,7 +13,7 @@ namespace AngleTool
     public partial class FormDownLoadProgressBar : Form
     {
         /// <summary>
-        /// 下载状态：0，未下载完成；1，下载完成；2，用户取消
+        /// 下载状态：0，未下载完成；1，下载完成；2，用户取消；4，用户确认安装
         /// </summary>
         private static int downloadStatus = 0;
         public FormDownLoadProgressBar()
@@ -42,7 +42,7 @@ namespace AngleTool
         private void cancelDownload()
         {
             // 如果状态已经是2了，则不需要再弹窗确认
-            if(downloadStatus == 2)
+            if(downloadStatus == 2 || downloadStatus == 4)
             {
                 return;
             }
@@ -144,6 +144,7 @@ namespace AngleTool
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
                     Process p = Process.Start(CommonConstant.CHROME_LOCAL_SAVE_PATH);
+                    downloadStatus = 4;
                     this.Close();
                 }
                 else//如果点击“取消”按钮

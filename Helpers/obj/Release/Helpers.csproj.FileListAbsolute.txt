@@ -1,0 +1,5 @@
+E:\csharpcode\AngleTool\Helpers\bin\Release\Helpers.dll.config
+E:\csharpcode\AngleTool\Helpers\bin\Release\Helpers.dll
+E:\csharpcode\AngleTool\Helpers\bin\Release\Helpers.pdb
+E:\csharpcode\AngleTool\Helpers\obj\Release\Helpers.dll
+E:\csharpcode\AngleTool\Helpers\obj\Release\Helpers.pdb

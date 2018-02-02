@@ -62,6 +62,7 @@ namespace AngleTool
             this.richTextBoxLog.Size = new System.Drawing.Size(567, 282);
             this.richTextBoxLog.TabIndex = 1;
             this.richTextBoxLog.Text = "";
+            this.richTextBoxLog.TextChanged += new System.EventHandler(this.richTextBoxLog_TextChanged);
             // 
             // linkLabelReduction
             // 
@@ -108,7 +109,7 @@ namespace AngleTool
             // 
             this.button3.Location = new System.Drawing.Point(602, 173);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(172, 37);
+            this.button3.Size = new System.Drawing.Size(172, 36);
             this.button3.TabIndex = 8;
             this.button3.Text = "获取Chrome安装路径";
             this.button3.UseVisualStyleBackColor = true;
