@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace AngleTool
@@ -12,46 +14,43 @@ namespace AngleTool
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            var wi = WindowsIdentity.GetCurrent();
+            var wp = new WindowsPrincipal(wi);
 
-            /**
-             * 当前用户是管理员的时候，直接启动应用程序
-             * 如果不是管理员，则使用启动对象启动程序，以确保使用管理员身份运行
-             */
-            //获得当前登录的Windows用户标示
-            System.Security.Principal.WindowsIdentity identity = System.Security.Principal.WindowsIdentity.GetCurrent();
-            System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal(identity);
+            bool runAsAdmin = wp.IsInRole(WindowsBuiltInRole.Administrator);
 
-            //判断当前登录用户是否为管理员
-            if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+            if (!runAsAdmin)
             {
-                //如果是管理员，则直接运行
-                Application.Run(new FormMain());
+                // It is not possible to launch a ClickOnce app as administrator directly,
+                // so instead we launch the app as administrator in a new process.
+                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+
+                // The following properties run the new process as administrator
+                processInfo.UseShellExecute = true;
+                processInfo.Verb = "runas";
+
+                // Start the new process
+                try
+                {
+                    Process.Start(processInfo);
+                }
+                catch (Exception)
+                {
+                    // The user did not allow the application to run as administrator
+                    MessageBox.Show("Sorry, but I don't seem to be able to start " +
+                       "this program with administrator rights!");
+                }
+
+                // Shut down the current process
+                Application.Exit();
             }
             else
             {
-                //创建启动对象
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.UseShellExecute = true;
-                startInfo.WorkingDirectory = Environment.CurrentDirectory;
-                startInfo.FileName = Application.ExecutablePath;
-                //设置启动动作,确保以管理员身份运行
-                startInfo.Verb = "runas";
-                try
-                {
-                    System.Diagnostics.Process.Start(startInfo);
-                }
-                catch
-                {
-                    return;
-                }
-                //退出
-                Application.Exit();
+                // We are running as administrator
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FormMain());
             }
-
-
-            //Application.Run(new FormMain());
         }
     }
 }
