@@ -47,7 +47,8 @@ namespace AngleTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBoxLog.AppendText(HostModifier.optiHosts());
+            richTextBoxLog.AppendText(HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd, 
+                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd));
         }
 
         private void Form1_Load(object sender, EventArgs e)

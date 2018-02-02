@@ -44,16 +44,6 @@ namespace AngleToolHelper
         private static string systemHostsFileName = systemHostsPath + @"\hosts";
 
         /// <summary>
-        /// hosts文件内容标记，根据有无此标记判断是否是程序修改过的hosts，标记开始
-        /// </summary>
-        private static string regionStart = "# modified by angle-schedule 请勿修改此区块内容 start";
-
-        /// <summary>
-        /// hosts文件内容标记，根据有无此标记判断是否是程序修改过的hosts，标记结束
-        /// </summary>
-        private static string regionEnd = "# modified by angle-schedule 请勿修改此区块内容 end";
-
-        /// <summary>
         /// 还原Hosts
         /// </summary>
         /// <returns></returns>
@@ -85,28 +75,41 @@ namespace AngleToolHelper
         /// <summary>
         /// 优化Hosts
         /// </summary>
+        /// <param name="userHosts">用户自己的hosts</param>
+        /// <param name="regionStart">优化的hosts开始节点</param>
+        /// <param name="optiHosts">优化的hosts内容</param>
+        /// <param name="regionEnd">优化的hosts结束节点</param>
         /// <returns></returns>
-        public static String optiHosts()
+        public static String optiHosts(string[] optiHosts, string regionStart, string regionEnd)
         {
+            if (optiHosts.Length == 0)
+            {
+                return "待优化hosts为空，系统错误，优化失败";
+            }
+
             try
             {
                 // 复制hosts文件到临时目录
                 //richTextBoxLog.AppendText("准备复制hosts文件……" + "\n");
-                if (!copyHostsToFile())
+                if (!copyHostsToFile(regionStart, regionEnd))
                 {
                     return "复制hosts文件失败，请尝试在管理员模式下启动" + "\n";
                 }
 
-                // 修改临时目录的hosts文件，增加hoswork配置
-                string[] lines = { ReadFile(tempHostsFileName), regionStart,
-                    "128.28.16.248 www.hoswork.com", "128.28.16.248 mch.hoswork.com",
-                    "58.67.212.249 www.hoswork.com", "58.67.212.254 qy.gzhc365.com",
-                    "59.37.116.113 open.work.weixin.qq.com", "218.75.177.22 js.aq.qq.com",
-                    "59.63.235.19 rescdn.qqmail.com", "175.6.26.201 p0xytndy5.bkt.clouddn.com",
-                    "47.95.64.126 www.ncqis.cn",
-                    regionEnd };
-                WriteFile(tempHostsFileName, lines);
-                //richTextBoxLog.AppendText("修改临时目录Hosts文件成功" + "\n");
+                // 获取用户当前的hosts配置
+                string userHosts = ReadFile(tempHostsFileName);
+
+                //创建一个List
+                List<string> tempHosts = new List<string>();
+                tempHosts.Add(userHosts);
+                foreach (string optiHost in optiHosts)
+                {
+                    tempHosts.Add(optiHost);
+                }
+
+                string[] hostsForModify = tempHosts.ToArray();
+
+                WriteFile(tempHostsFileName, hostsForModify);
 
                 // 复制修改过的hosts文件到原目录
                 File.Copy(tempHostsFileName, systemHostsFileName, true);
@@ -141,14 +144,14 @@ namespace AngleToolHelper
         /// 复制hosts文件到临时目录
         /// </summary>
         /// <returns></returns>
-        private static Boolean copyHostsToFile()
+        private static Boolean copyHostsToFile(string regionStart, string regionEnd)
         {
             try
             {
                 Directory.CreateDirectory(CommonConstant.TEMP_HIWORK_PATH); // 创建目录
                 File.Copy(systemHostsFileName, tempHostsFileName, true);
                 // 清理hosts中本程序添加的区块（如果有）
-                cleanHosts(tempHostsFileName);
+                cleanHosts(tempHostsFileName, regionStart, regionEnd);
                 // 备份一份清理过的hosts
                 File.Copy(tempHostsFileName, tempHostsBakFileName, true);
             }
@@ -165,7 +168,7 @@ namespace AngleToolHelper
         /// 清理文件中本程序添加的hosts信息
         /// </summary>
         /// <param name="fileName"></param>
-        private static void cleanHosts(string fileName)
+        private static void cleanHosts(string fileName, string regionStart, string regionEnd)
         {
             string fileContent = ReadFile(fileName); // 文件内容
 
