@@ -11,18 +11,27 @@ namespace AngleTool
     {
         /// <summary>
         /// hosts文件内容标记，根据有无此标记判断是否是程序修改过的hosts，标记开始
+        /// 
+        /// 此常量作为重要的识别标识符，请勿修改
         /// </summary>
-        public static string regionStart = "# modified by angle-schedule for yuebei-001-v1.0 请勿修改此区块内容 start";
+        public static string regionStart = "# modified by angle-schedule 请勿修改此区块内容 start";
 
         /// <summary>
         /// hosts文件内容标记，根据有无此标记判断是否是程序修改过的hosts，标记结束
+        /// 
+        /// 此常量作为重要的识别标识符，请勿修改
         /// </summary>
-        public static string regionEnd = "# modified by angle-schedule for yuebei-001-v1.0 请勿修改此区块内容 end";
+        public static string regionEnd = "# modified by angle-schedule 请勿修改此区块内容 end";
+
+        /// <summary>
+        /// Hosts版本
+        /// </summary>
+        public static string hostsVersion = "# angle-schedule-yuebei V1.0.0";
 
         /// <summary>
         /// 个性化的Hosts配置
         /// </summary>
-        public static string[] hostsForAdd = { regionStart,
+        public static string[] hostsForAdd = { regionStart, hostsVersion,
                     "128.28.16.248 www.hoswork.com", "128.28.16.248 mch.hoswork.com",
                     "58.67.212.249 www.hoswork.com", "58.67.212.254 qy.gzhc365.com",
                     "59.37.116.113 open.work.weixin.qq.com", "218.75.177.22 js.aq.qq.com",
@@ -33,6 +42,6 @@ namespace AngleTool
         /// <summary>
         /// 粤北版本
         /// </summary>
-        public static string version = "1.0.0.2.yuebei";
+        public static string version = "yuebei 1.1.0";
     }
 }

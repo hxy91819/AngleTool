@@ -10,16 +10,33 @@ namespace AngleTool
 {
     public partial class FormMain : Form
     {
-        
+
 
         /// <summary>
         /// 程序发布版本：默认为Debug
         /// </summary>
         private string version = "Debug";
 
+        /// <summary>
+        /// 开发者模式窗口高度
+        /// </summary>
+        private const int ADVANCE_MODE_FORM_HEIGHT = 622;
+
+        /// <summary>
+        /// 常规模式窗口高度
+        /// </summary>
+        private const int NROMAL_MODE_FORM_HEIGHT = 432;
+
+        /// <summary>
+        /// 当前是否是开发者模式
+        /// </summary>
+        private bool advanceMode = false;
+
         public FormMain()
         {
             InitializeComponent();
+
+            richTextBoxNormal.Dock = DockStyle.Fill;
 
             /* 2018-02-02 使用ClickOne发布，无法用管理员模式启动。使用Process方法开启管理员后，此方法将无法获取版本。
             try
@@ -44,48 +61,52 @@ namespace AngleTool
             }
             catch (Exception e)
             {
-                richTextBoxLog.AppendText("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
+                advanceLog("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
             }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBoxLog.AppendText(HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd, 
-                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd));
+            advanceLog(HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
+                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
+                HospitalCustomizedConfig.hostsVersion));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBoxLog.AppendText("Copyright 2018 广州海鹚网络科技有限公司 All Rights Reserved V " + version + "\n\n");
-            richTextBoxLog.AppendText("欢迎使用！请点击“点我优化”，完成网络优化，您可能需要重启计算机后使优化生效。\n" + "\n");
+            normalLog("Copyright 2018 广州海鹚网络科技有限公司 All Rights Reserved V " + version + "\n");
 
+            /*
+            advanceLog("欢迎使用！请点击“点我优化”，完成网络优化，您可能需要重启计算机后使优化生效。\n");
             string hint = "注意：由于追加的Hosts配置在文件末尾，查看Hosts配置时，请翻到Hosts末尾查看";
-            richTextBoxLog.AppendText(hint +"\n\n\n");
+            richTextBoxAdvance.AppendText(hint +"\n\n\n");
 
-            string text = richTextBoxLog.Text;
+            string text = richTextBoxAdvance.Text;
             int length = text.IndexOf(hint);
 
-            richTextBoxLog.Select(length, length + hint.Length);
-            richTextBoxLog.SelectionColor = Color.Red;
-            richTextBoxLog.SelectionFont = new Font("宋体", 9, FontStyle.Bold);
-            richTextBoxLog.SelectionLength = 0;
+            richTextBoxAdvance.Select(length, length + hint.Length);
+            richTextBoxAdvance.SelectionColor = Color.Red;
+            richTextBoxAdvance.SelectionFont = new Font("宋体", 9, FontStyle.Bold);
+            richTextBoxAdvance.SelectionLength = 0;
+            */
             this.Text += " V " + version;
         }
 
         private void linkLabelReduction_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            richTextBoxLog.AppendText(HostModifier.ReductionHosts());
+
         }
 
         private void btnGetChromeInstallInfo_Click(object sender, EventArgs e)
         {
             if (BrowerConfiger.hasChromeInstalled())
             {
-                formLog("您已经安装了谷歌浏览器");
-            } else
+                advanceLog("您已经安装了谷歌浏览器");
+            }
+            else
             {
-                formLog("您尚未安装谷歌浏览器，建议您使用谷歌浏览器以获得最佳体验");
+                advanceLog("您尚未安装谷歌浏览器，建议您使用谷歌浏览器以获得最佳体验");
             }
         }
 
@@ -100,9 +121,14 @@ namespace AngleTool
         ///
         /// </summary>
         /// <param name="log"></param>
-        private void formLog(string log)
+        private void advanceLog(string log)
         {
-            richTextBoxLog.AppendText(log + "\n");
+            richTextBoxAdvance.AppendText(log + "\n");
+        }
+
+        private void normalLog(string log)
+        {
+            richTextBoxNormal.AppendText(log + "\n");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -114,17 +140,17 @@ namespace AngleTool
 
         private void button3_Click(object sender, EventArgs e)
         {
-            formLog(BrowerConfiger.getChromeInstallPath());
+            advanceLog(BrowerConfiger.getChromeInstallPath());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            formLog(BrowerConfiger.getDefaultBrowerPath());
+            advanceLog(BrowerConfiger.getDefaultBrowerPath());
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            formLog(BrowerConfiger.setDefaultBrower());
+            advanceLog(BrowerConfiger.setDefaultBrower());
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -139,8 +165,40 @@ namespace AngleTool
 
         private void richTextBoxLog_TextChanged(object sender, EventArgs e)
         {
-            richTextBoxLog.SelectionStart = richTextBoxLog.Text.Length;
-            richTextBoxLog.ScrollToCaret();
+            richTextBoxAdvance.SelectionStart = richTextBoxAdvance.Text.Length;
+            richTextBoxAdvance.ScrollToCaret();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            advanceLog(HostModifier.ReductionHosts());
+        }
+
+        private void linkLabelAdvance_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (advanceMode)
+            {
+                richTextBoxNormal.Visible = true;
+                advanceMode = false;
+            }
+            else
+            {
+                panelCenter.Visible = true;
+                richTextBoxNormal.Visible = false;
+                advanceMode = true;
+            }
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            this.Show();
+            backgroundWorkerAuto.RunWorkerAsync();
+        }
+
+        private void backgroundWorkerAuto_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            normalLog("1/N：检查Hosts……");
+
         }
     }
 }

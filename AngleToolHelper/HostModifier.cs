@@ -80,7 +80,7 @@ namespace AngleToolHelper
         /// <param name="optiHosts">优化的hosts内容</param>
         /// <param name="regionEnd">优化的hosts结束节点</param>
         /// <returns></returns>
-        public static String optiHosts(string[] optiHosts, string regionStart, string regionEnd)
+        public static String optiHosts(string[] optiHosts, string regionStart, string regionEnd, string hostsVersion)
         {
             if (optiHosts.Length == 0)
             {
@@ -89,15 +89,20 @@ namespace AngleToolHelper
 
             try
             {
+                // 获取用户当前的hosts配置
+                string userHosts = ReadFile(systemHostsFileName);
+                // 判断当前的hosts里是否包含程序设定hosts版本
+                if (userHosts.Contains(hostsVersion))
+                {
+                    return "hosts已经处于优化状态";
+                }
+
                 // 复制hosts文件到临时目录
                 //richTextBoxLog.AppendText("准备复制hosts文件……" + "\n");
                 if (!copyHostsToFile(regionStart, regionEnd))
                 {
                     return "复制hosts文件失败，请尝试在管理员模式下启动" + "\n";
                 }
-
-                // 获取用户当前的hosts配置
-                string userHosts = ReadFile(tempHostsFileName);
 
                 //创建一个List
                 List<string> tempHosts = new List<string>();
