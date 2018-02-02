@@ -43,6 +43,10 @@ namespace AngleToolHelper
         /// </summary>
         private static string systemHostsFileName = systemHostsPath + @"\hosts";
 
+        public const string HOSTS_OK = "优化Hosts成功";
+
+        public const string HOSTS_ALREADY_OK = "Host已经处于优化状态";
+
         /// <summary>
         /// 还原Hosts
         /// </summary>
@@ -94,7 +98,7 @@ namespace AngleToolHelper
                 // 判断当前的hosts里是否包含程序设定hosts版本
                 if (userHosts.Contains(hostsVersion))
                 {
-                    return "hosts已经处于优化状态";
+                    return HOSTS_ALREADY_OK;
                 }
 
                 // 复制hosts文件到临时目录
@@ -118,7 +122,7 @@ namespace AngleToolHelper
 
                 // 复制修改过的hosts文件到原目录
                 File.Copy(tempHostsFileName, systemHostsFileName, true);
-                return "设置Hosts成功";
+                return HOSTS_OK;
             }
             catch (Exception exception)
             {

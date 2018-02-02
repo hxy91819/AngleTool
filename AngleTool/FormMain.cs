@@ -32,6 +32,12 @@ namespace AngleTool
         /// </summary>
         private bool advanceMode = false;
 
+        /// <summary>
+        /// 满足所有优化状态的时候，按钮显示的文字
+        /// </summary>
+        private const string BUTTON_FLEX_OPEN_ANGLE_SCHEDULE = "打开天使排班";
+
+
         public FormMain()
         {
             InitializeComponent();
@@ -196,15 +202,11 @@ namespace AngleTool
             this.Show();
         }
 
-        private void backgroundWorkerAuto_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-
-        }
 
         private void buttonFlex_Click(object sender, EventArgs e)
         {
             buttonFlex.Enabled = false;
-            if (buttonFlex.Text.Equals("打开天使排班"))
+            if (buttonFlex.Text.Equals(BUTTON_FLEX_OPEN_ANGLE_SCHEDULE))
             {
                 Process pro = new Process();
                 pro.StartInfo.FileName = "chrome.exe";
@@ -217,7 +219,7 @@ namespace AngleTool
                 {
                     normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
                     buttonFlex.Enabled = true;
-                    buttonFlex.Text = "打开天使排班";
+                    buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
                 }
             }
 
@@ -232,7 +234,7 @@ namespace AngleTool
             string result = HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
                 HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
                 HospitalCustomizedConfig.hostsVersion);
-            if (!result.Equals("设置Hosts成功") && !result.Equals("hosts已经处于优化状态"))
+            if (!result.Equals(HostModifier.HOSTS_OK) && !result.Equals(HostModifier.HOSTS_ALREADY_OK))
             {
                 normalLog("1/4：" + result);
                 buttonFlex.Enabled = true;
@@ -274,7 +276,7 @@ namespace AngleTool
             }
 
             string setBrowerResult = BrowerConfiger.setDefaultBrower();
-            if (!setBrowerResult.Equals("设置成功"))
+            if (!setBrowerResult.Equals(BrowerConfiger.DEFAULT_BROWSER_OK))
             {
                 normalLog("3/4：" + setBrowerResult);
                 buttonFlex.Enabled = true;
@@ -310,7 +312,7 @@ namespace AngleTool
             {
                 normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
                 buttonFlex.Enabled = true;
-                buttonFlex.Text = "打开天使排班";
+                buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
             }
             timer1.Enabled = false;
         }

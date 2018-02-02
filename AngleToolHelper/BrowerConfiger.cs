@@ -12,6 +12,8 @@ namespace AngleToolHelper
     public static class BrowerConfiger
     {
         private static LogHelper logger = new LogHelper();
+
+        public const string DEFAULT_BROWSER_OK = "默认浏览器设置成功";
         
         /// <summary>
         /// 判断是否安装了Chrome
@@ -109,7 +111,7 @@ namespace AngleToolHelper
                 logger.WriteLog("设置默认浏览器发生异常：" + e.ToString());
             }
 
-            return "设置成功";
+            return DEFAULT_BROWSER_OK;
         }
 
         /// <summary>

@@ -42,6 +42,6 @@ namespace AngleTool
         /// <summary>
         /// 粤北版本
         /// </summary>
-        public static string version = "yuebei 1.1.0";
+        public static string version = "1.1.0 粤北";
     }
 }
