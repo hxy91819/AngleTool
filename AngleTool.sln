@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngleTool", "HostModifier\AngleTool.csproj", "{B8158FA8-D888-4EF6-95EC-5426581B904B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{80D0DE29-60AA-4AEE-A191-B7D2F56FAEC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngleToolHelper", "ClassLibrary1\AngleToolHelper.csproj", "{7FE6C016-A119-4AB0-9702-88A3E8E327D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngleTool", "AngleTool\AngleTool.csproj", "{B8158FA8-D888-4EF6-95EC-5426581B904B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngleToolHelper", "AngleToolHelper\AngleToolHelper.csproj", "{7FE6C016-A119-4AB0-9702-88A3E8E327D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80D0DE29-60AA-4AEE-A191-B7D2F56FAEC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80D0DE29-60AA-4AEE-A191-B7D2F56FAEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80D0DE29-60AA-4AEE-A191-B7D2F56FAEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D0DE29-60AA-4AEE-A191-B7D2F56FAEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8158FA8-D888-4EF6-95EC-5426581B904B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FE6C016-A119-4AB0-9702-88A3E8E327D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FE6C016-A119-4AB0-9702-88A3E8E327D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE6C016-A119-4AB0-9702-88A3E8E327D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
