@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="AngleTool.exe" version="1.0.0.22" publicKeyToken="05536fb3ac3935de" language="zh-CN" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="20180118030852327_easyicon_net_128.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="AngleTool" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="AngleTool.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 清单选项
+          如果要更改 Windows 用户帐户控制级别，请用以下节点之一替换
+          requestedExecutionLevel 节点。
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+          如果要利用文件和注册表虚拟化提供
+          向后兼容性，请删除 requestedExecutionLevel 节点。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="4" minorVersion="10" buildNumber="0" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AngleTool.exe" size="87904">
+      <assemblyIdentity name="AngleTool" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CiKEKwU1ZK9WKPbKfUu/lVC7P+o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AngleToolHelper.dll" size="10752">
+      <assemblyIdentity name="AngleToolHelper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>4O4cDtZdMQs/xgbUCDOVEHbfqDA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Helpers.dll" size="13824">
+      <assemblyIdentity name="Helpers" version="1.0.0.0" publicKeyToken="EFADFF557F7B7618" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>+Rm+BFbbOPuD46yQpFn6v3E3LyU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="20180118030852327_easyicon_net_128.ico" size="67646">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>q85iA8Vgx14/MQeH/IScN0NuZiE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AngleTool.exe.config" size="134">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZYVCbF014jyazUw+0nEkH92/ao4=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=OW\hxy" issuerKeyHash="10726328b98471cd576a1206def088f45cf099d3" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>w4Xd3kf9qdbmweS3Hr26z7pzCMg=</DigestValue></Reference></SignedInfo><SignatureValue>n8y/kaELUOuw+9c8FhgPjzU1NLlBKTaNQD9hX8GZldkutJxLPylM4lCDHXmJUHUyK4BuQBtEszGrrwMMwdjWWB/MJm1iLZyHbCB8vhLzKe5QPnLd/BQF7z5I1Vp+7cyB6YudW1QXBD9+8kah1KefA0MkinFIU9k9uq/+YEc3IxU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>q+zaDNW2WhVFKgKj66APOU5pQQnQjD5OZ3PbwdPxf18ML0GDb8bMHTHu/riNNaq6hNE2qdINYS/19EqfQvUGIsEE7ct2yjQStnfNQOiZplOIzCKpyiyuktbm2KyfFoPBQeixKUMtCmIQEnGnX1ADY5mMaoNB7w+Vr45LGpG8DTU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="c80873bacfbabd1eb7e4c1e6d6a9fd47dedd85c3" Description="" Url=""><as:assemblyIdentity name="AngleTool.exe" version="1.0.0.22" publicKeyToken="05536fb3ac3935de" language="zh-CN" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=OW\hxy</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>mEZgWqvKf0GW48Fi+VN4c1ln5D4=</DigestValue></Reference></SignedInfo><SignatureValue>J/mMHEw1oXm7D3tjPbcg1IOxdVRbuN4nUZhisn3phPDxtLgtSKHn+nBVZGmapRXHYL4bJ/lknbxC04Fskatxr4aBcpHb58xIWKCx+oimbN3lZ3uf/z6Nm2dKyQWWcZuNq3CimWtMK2pOH+UNJKMBPgBCUxy0wlg+CM7YhpP2P+Y=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>q+zaDNW2WhVFKgKj66APOU5pQQnQjD5OZ3PbwdPxf18ML0GDb8bMHTHu/riNNaq6hNE2qdINYS/19EqfQvUGIsEE7ct2yjQStnfNQOiZplOIzCKpyiyuktbm2KyfFoPBQeixKUMtCmIQEnGnX1ADY5mMaoNB7w+Vr45LGpG8DTU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBsTCCARqgAwIBAgIQamnzrtjVlZlPvHVkPy7ZbjANBgkqhkiG9w0BAQUFADAXMRUwEwYDVQQDHgwATwBXAFwAaAB4AHkwHhcNMTgwMTIyMDUxODQ3WhcNMTkwMTIyMTExODQ3WjAXMRUwEwYDVQQDHgwATwBXAFwAaAB4AHkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKvs2gzVtloVRSoCo+ugDzlOaUEJ0Iw+Tmdz28HT8X9fDC9Bg2/GzB0x7v64jTWquoTRNqnSDWEv9fRKn0L1BiLBBO3Ldso0ErZ3zUDomaZTiMwiqcosrpLW5tisnxaDwUHosSlDLQpiEBJxp19QA2OZjGqDQe8Pla+OSxqRvA01AgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAabRzv+5KFzyBONWxOXFqJ51jTet4JAa7bvMGimT4DmtRwmZrKyMl0HRqf/pArMcv84nkafOGb/rPAScNTHXlxJ++rUtgSfw5M8ixlBOYceoUWigkeIWnM3QTwpxgfz2i8v+1IDLxPusBCXnYNsA+HOV6CC/qUyehSseelqDkTrE=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

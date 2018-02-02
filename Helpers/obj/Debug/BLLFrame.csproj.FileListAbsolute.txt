@@ -1,0 +1,6 @@
+E:\06-学习\练习源码\2013\ADO练习\Output\BLLFrame.dll.config
+E:\06-学习\练习源码\2013\ADO练习\Output\BLLFrame.xml
+E:\06-学习\练习源码\2013\ADO练习\Output\BLLFrame.dll
+E:\06-学习\练习源码\2013\ADO练习\Output\BLLFrame.pdb
+E:\06-学习\练习源码\2013\ADO练习\ConfigSettings\obj\Debug\BLLFrame.dll
+E:\06-学习\练习源码\2013\ADO练习\ConfigSettings\obj\Debug\BLLFrame.pdb

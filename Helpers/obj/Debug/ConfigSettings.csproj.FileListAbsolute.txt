@@ -1,0 +1,6 @@
+E:\06-学习\练习源码\2013\ADO练习\Output\ConfigSettings.dll.config
+E:\06-学习\练习源码\2013\ADO练习\Output\ConfigSettings.dll
+E:\06-学习\练习源码\2013\ADO练习\Output\ConfigSettings.pdb
+E:\06-学习\练习源码\2013\ADO练习\ConfigSettings\obj\Debug\ConfigSettings.dll
+E:\06-学习\练习源码\2013\ADO练习\ConfigSettings\obj\Debug\ConfigSettings.pdb
+E:\06-学习\练习源码\2013\ADO练习\Output\ConfigSettings.XML

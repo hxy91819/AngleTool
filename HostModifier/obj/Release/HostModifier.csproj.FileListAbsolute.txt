@@ -1,0 +1,14 @@
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\HostModifier.exe.config
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.csprojResolveAssemblyReference.cache
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.FormMain.resources
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.Properties.Resources.resources
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.csproj.GenerateResource.Cache
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.exe
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.pdb
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\HostModifier.exe.manifest
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\HostModifier.application
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\HostModifier.exe
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\HostModifier.pdb
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.exe.manifest
+E:\VisualStudio\hiwork\HostModifier\HostModifier\obj\Release\HostModifier.application
+E:\VisualStudio\hiwork\HostModifier\HostModifier\bin\Release\AngleTool.exe.config

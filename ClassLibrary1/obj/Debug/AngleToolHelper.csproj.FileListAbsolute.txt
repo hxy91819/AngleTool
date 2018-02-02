@@ -1,0 +1,7 @@
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\bin\Debug\Helpers.dll
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\bin\Debug\Helpers.pdb
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\obj\Debug\AngleToolHelper.csprojResolveAssemblyReference.cache
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\bin\Debug\AngleToolHelper.dll
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\bin\Debug\AngleToolHelper.pdb
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\obj\Debug\AngleToolHelper.dll
+E:\VisualStudio\hiwork\HostModifier\ClassLibrary1\obj\Debug\AngleToolHelper.pdb
