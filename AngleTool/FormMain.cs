@@ -18,16 +18,6 @@ namespace AngleTool
         private string version = "Debug";
 
         /// <summary>
-        /// 开发者模式窗口高度
-        /// </summary>
-        private const int ADVANCE_MODE_FORM_HEIGHT = 622;
-
-        /// <summary>
-        /// 常规模式窗口高度
-        /// </summary>
-        private const int NROMAL_MODE_FORM_HEIGHT = 432;
-
-        /// <summary>
         /// 当前是否是开发者模式
         /// </summary>
         private bool advanceMode = false;
@@ -67,16 +57,9 @@ namespace AngleTool
             }
             catch (Exception e)
             {
-                advanceLog("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
+                normalLog("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            advanceLog(HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
-                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
-                HospitalCustomizedConfig.hostsVersion));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -101,100 +84,9 @@ namespace AngleTool
             timer1.Enabled = true;
         }
 
-        private void linkLabelReduction_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void btnGetChromeInstallInfo_Click(object sender, EventArgs e)
-        {
-            if (BrowerConfiger.hasChromeInstalled())
-            {
-                advanceLog("您已经安装了谷歌浏览器");
-            }
-            else
-            {
-                advanceLog("您尚未安装谷歌浏览器，建议您使用谷歌浏览器以获得最佳体验");
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            SystemConfiger.CreateDesktopShortCut();
-        }
-
-        /// <summary>
-        ///  
-        /// 窗口内打印日志
-        ///
-        /// </summary>
-        /// <param name="log"></param>
-        private void advanceLog(string log)
-        {
-            richTextBoxAdvance.AppendText(log + "\n");
-        }
-
         private void normalLog(string log)
         {
             richTextBoxNormal.AppendText(log + "\n");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // 打开下载窗口
-            FormDownLoadProgressBar formDownLoadProgressBar = new FormDownLoadProgressBar();
-            formDownLoadProgressBar.ShowDialog();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            advanceLog(BrowerConfiger.getChromeInstallPath());
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            advanceLog(BrowerConfiger.getDefaultBrowerPath());
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            advanceLog(BrowerConfiger.setDefaultBrower());
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Process pro = new Process();
-            pro.StartInfo.FileName = "chrome.exe";
-            pro.StartInfo.Arguments = @"https://mch.hoswork.com/mch/index.html#/wxlogin";
-            pro.Start();
-
-            //System.Diagnostics.Process.Start(@"https://mch.hoswork.com/mch/index.html#/wxlogin");
-        }
-
-        private void richTextBoxLog_TextChanged(object sender, EventArgs e)
-        {
-            richTextBoxAdvance.SelectionStart = richTextBoxAdvance.Text.Length;
-            richTextBoxAdvance.ScrollToCaret();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            advanceLog(HostModifier.ReductionHosts());
-        }
-
-        private void linkLabelAdvance_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (advanceMode)
-            {
-                richTextBoxNormal.Visible = true;
-                advanceMode = false;
-            }
-            else
-            {
-                panelCenter.Visible = true;
-                richTextBoxNormal.Visible = false;
-                advanceMode = true;
-            }
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
