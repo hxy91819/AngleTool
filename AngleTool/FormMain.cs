@@ -32,8 +32,6 @@ namespace AngleTool
         {
             InitializeComponent();
 
-            richTextBoxNormal.Dock = DockStyle.Fill;
-
             /* 2018-02-02 使用ClickOne发布，无法用管理员模式启动。使用Process方法开启管理员后，此方法将无法获取版本。
             try
             {
@@ -81,12 +79,12 @@ namespace AngleTool
             */
             this.Text += " V " + version;
 
-            timer1.Enabled = true;
+            timerLazyLoad.Enabled = true;
         }
 
         private void normalLog(string log)
         {
-            richTextBoxNormal.AppendText(log + "\n");
+            // 不打印一般性日志
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
@@ -206,7 +204,7 @@ namespace AngleTool
                 buttonFlex.Enabled = true;
                 buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
             }
-            timer1.Enabled = false;
+            timerLazyLoad.Enabled = false;
         }
     }
 }
