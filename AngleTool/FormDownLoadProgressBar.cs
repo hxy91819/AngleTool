@@ -140,7 +140,7 @@ namespace AngleTool
             {
                 // 下载完成后，提示用户是否安装
                 MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
-                DialogResult dr = MessageBox.Show("谷歌浏览器已经下载完成，是否需要立即安装？", "安装确认", messButton);
+                DialogResult dr = MessageBox.Show("谷歌浏览器已经下载完成，是否需要立即安装？（谷歌浏览器会于后台安装，请安装成功之后，再点击主窗口的“点击按钮继续”）", "安装确认", messButton);
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
                     Process p = Process.Start(CommonConstant.CHROME_LOCAL_SAVE_PATH);

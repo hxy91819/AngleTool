@@ -136,7 +136,7 @@ namespace AngleTool
             {
                 // 下载完成后，提示用户是否安装
                 MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
-                DialogResult dr = MessageBox.Show("您尚未安装谷歌浏览器，点击确认可下载安装", "谷歌浏览器未安装", messButton);
+                DialogResult dr = MessageBox.Show("您尚未安装谷歌浏览器，点击确认可下载安装。请在安装完毕后，点击主窗口的“点击按钮继续”", "谷歌浏览器未安装", messButton);
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
                     // 打开下载窗口

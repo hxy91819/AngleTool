@@ -37,11 +37,6 @@ namespace AngleTool
             richTextBoxAdvance.ScrollToCaret();
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonOpenBrowser_Click(object sender, EventArgs e)
         {
             // 使用指定的浏览器打开
