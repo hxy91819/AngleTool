@@ -25,5 +25,15 @@ namespace AngleToolHelper
         /// Hiwork后台网站登录页地址
         /// </summary>
         public static string HIWORK_MCH_LOGIN_PAGE = @"https://mch.hoswork.com/mch/index.html#/wxlogin";
+
+        /// <summary>
+        /// 标签展示对
+        /// </summary>
+        public static string LABEL_SHOW_OK = "√";
+
+        /// <summary>
+        /// 标签展示错
+        /// </summary>
+        public static string LABEL_SHOW_FAIL = "×";
     }
 }

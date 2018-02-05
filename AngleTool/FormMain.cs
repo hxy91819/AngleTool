@@ -23,6 +23,11 @@ namespace AngleTool
         private bool advanceMode = false;
 
         /// <summary>
+        /// 进入开发者模式点击次数统计
+        /// </summary>
+        private int advanceModeClickCount = 0;
+
+        /// <summary>
         /// 满足所有优化状态的时候，按钮显示的文字
         /// </summary>
         private const string BUTTON_FLEX_OPEN_ANGLE_SCHEDULE = "打开天使排班";
@@ -180,18 +185,25 @@ namespace AngleTool
         {
             if (!stepSetHosts())
             {
+                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
                 return false;
             }
+
+            labelHostsInfo.Text = CommonConstant.LABEL_SHOW_OK;
 
             if (!stepInstallChrome())
             {
+                labelChromeInsallInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
                 return false;
             }
+            labelChromeInsallInfo.Text = CommonConstant.LABEL_SHOW_OK;
 
             if (!stepSetDefaultBrowser())
             {
+                labelDefaultBrowserInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
                 return false;
             }
+            labelDefaultBrowserInfo.Text = CommonConstant.LABEL_SHOW_OK;
 
             return true;
         }
@@ -205,6 +217,21 @@ namespace AngleTool
                 buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
             }
             timerLazyLoad.Enabled = false;
+        }
+
+        private void labelChromeInstall_Click(object sender, EventArgs e)
+        {
+            // 如果点击了5次，则打开高级模式
+            if(advanceModeClickCount == 5)
+            {
+                advanceModeClickCount = 0;
+                FormAdvance formAdvance = new FormAdvance();
+                formAdvance.ShowDialog();
+            }
+            else
+            {
+                advanceModeClickCount++;
+            }
         }
     }
 }
