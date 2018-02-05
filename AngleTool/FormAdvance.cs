@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace AngleTool
 {
+    /// <summary>
+    /// 开发者模式窗口
+    /// </summary>
     public partial class FormAdvance : Form
     {
 

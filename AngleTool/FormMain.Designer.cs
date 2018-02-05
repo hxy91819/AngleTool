@@ -34,6 +34,7 @@ namespace AngleTool
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonFlex = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.linkLabelOpenErrorLog = new System.Windows.Forms.LinkLabel();
             this.labelChromeInsallInfo = new System.Windows.Forms.Label();
             this.labelDefaultBrowserInfo = new System.Windows.Forms.Label();
             this.labelHostsInfo = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace AngleTool
             // 
             // panelMain
             // 
+            this.panelMain.Controls.Add(this.linkLabelOpenErrorLog);
             this.panelMain.Controls.Add(this.labelChromeInsallInfo);
             this.panelMain.Controls.Add(this.labelDefaultBrowserInfo);
             this.panelMain.Controls.Add(this.labelHostsInfo);
@@ -70,12 +72,23 @@ namespace AngleTool
             this.panelMain.Size = new System.Drawing.Size(438, 157);
             this.panelMain.TabIndex = 17;
             // 
+            // linkLabelOpenErrorLog
+            // 
+            this.linkLabelOpenErrorLog.AutoSize = true;
+            this.linkLabelOpenErrorLog.Location = new System.Drawing.Point(327, 19);
+            this.linkLabelOpenErrorLog.Name = "linkLabelOpenErrorLog";
+            this.linkLabelOpenErrorLog.Size = new System.Drawing.Size(97, 15);
+            this.linkLabelOpenErrorLog.TabIndex = 7;
+            this.linkLabelOpenErrorLog.TabStop = true;
+            this.linkLabelOpenErrorLog.Text = "打开错误报告";
+            this.linkLabelOpenErrorLog.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelOpenErrorLog_LinkClicked);
+            // 
             // labelChromeInsallInfo
             // 
             this.labelChromeInsallInfo.AutoSize = true;
             this.labelChromeInsallInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelChromeInsallInfo.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.labelChromeInsallInfo.Location = new System.Drawing.Point(169, 70);
+            this.labelChromeInsallInfo.Location = new System.Drawing.Point(255, 70);
             this.labelChromeInsallInfo.Name = "labelChromeInsallInfo";
             this.labelChromeInsallInfo.Size = new System.Drawing.Size(23, 15);
             this.labelChromeInsallInfo.TabIndex = 6;
@@ -86,7 +99,7 @@ namespace AngleTool
             this.labelDefaultBrowserInfo.AutoSize = true;
             this.labelDefaultBrowserInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelDefaultBrowserInfo.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.labelDefaultBrowserInfo.Location = new System.Drawing.Point(169, 121);
+            this.labelDefaultBrowserInfo.Location = new System.Drawing.Point(255, 121);
             this.labelDefaultBrowserInfo.Name = "labelDefaultBrowserInfo";
             this.labelDefaultBrowserInfo.Size = new System.Drawing.Size(23, 15);
             this.labelDefaultBrowserInfo.TabIndex = 5;
@@ -97,7 +110,7 @@ namespace AngleTool
             this.labelHostsInfo.AutoSize = true;
             this.labelHostsInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelHostsInfo.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.labelHostsInfo.Location = new System.Drawing.Point(169, 19);
+            this.labelHostsInfo.Location = new System.Drawing.Point(255, 19);
             this.labelHostsInfo.Name = "labelHostsInfo";
             this.labelHostsInfo.Size = new System.Drawing.Size(23, 15);
             this.labelHostsInfo.TabIndex = 4;
@@ -108,9 +121,9 @@ namespace AngleTool
             this.labelChromeInstall.AutoSize = true;
             this.labelChromeInstall.Location = new System.Drawing.Point(56, 70);
             this.labelChromeInstall.Name = "labelChromeInstall";
-            this.labelChromeInstall.Size = new System.Drawing.Size(82, 15);
+            this.labelChromeInstall.Size = new System.Drawing.Size(157, 15);
             this.labelChromeInstall.TabIndex = 2;
-            this.labelChromeInstall.Text = "谷歌浏览器";
+            this.labelChromeInstall.Text = "是否已安装谷歌浏览器";
             this.labelChromeInstall.Click += new System.EventHandler(this.labelChromeInstall_Click);
             // 
             // labelDefaultBrowser
@@ -118,18 +131,18 @@ namespace AngleTool
             this.labelDefaultBrowser.AutoSize = true;
             this.labelDefaultBrowser.Location = new System.Drawing.Point(57, 121);
             this.labelDefaultBrowser.Name = "labelDefaultBrowser";
-            this.labelDefaultBrowser.Size = new System.Drawing.Size(82, 15);
+            this.labelDefaultBrowser.Size = new System.Drawing.Size(157, 15);
             this.labelDefaultBrowser.TabIndex = 1;
-            this.labelDefaultBrowser.Text = "默认浏览器";
+            this.labelDefaultBrowser.Text = "是否已设置默认浏览器";
             // 
             // labelHosts
             // 
             this.labelHosts.AutoSize = true;
             this.labelHosts.Location = new System.Drawing.Point(57, 19);
             this.labelHosts.Name = "labelHosts";
-            this.labelHosts.Size = new System.Drawing.Size(67, 15);
+            this.labelHosts.Size = new System.Drawing.Size(142, 15);
             this.labelHosts.TabIndex = 0;
-            this.labelHosts.Text = "网络优化";
+            this.labelHosts.Text = "是否已完成网络优化";
             // 
             // panel2
             // 
@@ -177,6 +190,7 @@ namespace AngleTool
         private System.Windows.Forms.Label labelChromeInsallInfo;
         private System.Windows.Forms.Label labelDefaultBrowserInfo;
         private System.Windows.Forms.Label labelHostsInfo;
+        private System.Windows.Forms.LinkLabel linkLabelOpenErrorLog;
     }
 }
 

@@ -50,6 +50,16 @@ namespace Helpers
             /// </summary>
             EXCEPTION = 2
         }
+
+        public string getLogPath()
+        {
+            // string logFileName = DateTime.Now.ToString("yyyyMMdd") + ".log";
+            string fullFilePath = System.IO.Directory.GetCurrentDirectory() + @"/Log/";
+            string fullFileName = fullFilePath;
+
+            return fullFileName;
+        }
+
         /// <summary>
         /// 常规记录日志
         /// </summary>

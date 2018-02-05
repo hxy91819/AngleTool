@@ -21,3 +21,9 @@ E:\VisualStudio\hiwork\HostModifier\Helpers\obj\Debug\Helpers.pdb
 E:\VisualStudio\hiwork\HostModifier\Helpers\bin\Debug\Helpers.dll.config
 E:\VisualStudio\hiwork\HostModifier\Helpers\bin\Debug\Helpers.dll
 E:\VisualStudio\hiwork\HostModifier\Helpers\bin\Debug\Helpers.pdb
+E:\csharpcode\AngleTool\Helpers\bin\Debug\Helpers.dll.config
+E:\csharpcode\AngleTool\Helpers\bin\Debug\Helpers.dll
+E:\csharpcode\AngleTool\Helpers\bin\Debug\Helpers.pdb
+E:\csharpcode\AngleTool\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+E:\csharpcode\AngleTool\Helpers\obj\Debug\Helpers.dll
+E:\csharpcode\AngleTool\Helpers\obj\Debug\Helpers.pdb

@@ -21,26 +21,38 @@ namespace AngleToolHelper
         /// <returns></returns>
         public static Boolean hasChromeInstalled()
         {
-            RegistryKey rk = Registry.CurrentUser;
-            RegistryKey software = rk.OpenSubKey("Software");
-            string[] subkeys = software.GetSubKeyNames();
-            foreach (string subkey in subkeys)
+            try
             {
-                logger.WriteLog(subkey);
-                if (subkey.Equals("Google"))
+                RegistryKey rk = Registry.CurrentUser;
+                RegistryKey software = rk.OpenSubKey("Software");
+                string[] subkeys = software.GetSubKeyNames();
+                foreach (string subkey in subkeys)
                 {
-                    RegistryKey google = software.OpenSubKey("Google");
-                    string[] googleSubKeys = google.GetSubKeyNames();
-                    foreach (var googleSubKey in googleSubKeys)
+                    if (subkey.Equals("Google"))
                     {
-                        if (googleSubKey.Equals("Chrome"))
+                        RegistryKey google = software.OpenSubKey("Google");
+                        string[] googleSubKeys = google.GetSubKeyNames();
+                        foreach (var googleSubKey in googleSubKeys)
                         {
-                            return true;
+                            if (googleSubKey.Equals("Chrome"))
+                            {
+                                RegistryKey chrome = google.OpenSubKey("Chrome");
+                                RegistryKey blbeacon = chrome.OpenSubKey("BLBeacon");
+                                if (!blbeacon.GetValue("version").Equals(string.Empty))
+                                {
+                                    // 版本字段不为空，则认为已经安装
+                                    return true;
+                                }
+                            }
                         }
+                        break;
                     }
-
-                    break;
                 }
+            }
+            catch (Exception e)
+            {
+                logger.WriteLog("hasChromeInstalled==>发生异常：" + e.ToString());
+                return false;
             }
 
             return false;
@@ -63,7 +75,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("下载文件发生异常，请稍后再试：e:" + e.ToString());
+                logger.WriteLog("downloadChrome==>下载文件发生异常，请稍后再试：e:" + e.ToString());
             }
             
         }
@@ -108,7 +120,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("设置默认浏览器发生异常：" + e.ToString());
+                logger.WriteLog("setDefaultBrower==>设置默认浏览器发生异常：" + e.ToString());
             }
 
             return DEFAULT_BROWSER_OK;
@@ -135,35 +147,43 @@ namespace AngleToolHelper
         /// <returns></returns>
         private static string getDefaultBrowerValue(string rootSubKey, string browerInstallPath, Boolean keepLastParameters)
         {
-            RegistryKey root = Registry.ClassesRoot;
-            RegistryKey command = root.OpenSubKey(rootSubKey);
-            string defaultBrowerPath = command.GetValue(string.Empty).ToString();
-            string[] paths = defaultBrowerPath.Split('"');
             StringBuilder sb = new StringBuilder();
-            if (keepLastParameters)
+            try
             {
-                for (int i = 0; i < paths.Length; i++)
+                RegistryKey root = Registry.ClassesRoot;
+                RegistryKey command = root.OpenSubKey(rootSubKey);
+                string defaultBrowerPath = command.GetValue(string.Empty).ToString();
+                string[] paths = defaultBrowerPath.Split('"');
+                
+                if (keepLastParameters)
                 {
-                    if (i == 0)
+                    for (int i = 0; i < paths.Length; i++)
                     {
-                        continue;
-                    }
-                    else if (i == 1)
-                    {
-                        sb.Append("\"").Append(browerInstallPath);
-                    }
-                    else
-                    {
-                        sb.Append("\"").Append(paths[i]);
+                        if (i == 0)
+                        {
+                            continue;
+                        }
+                        else if (i == 1)
+                        {
+                            sb.Append("\"").Append(browerInstallPath);
+                        }
+                        else
+                        {
+                            sb.Append("\"").Append(paths[i]);
+                        }
                     }
                 }
+                else
+                {
+                    // 使用chrome标准的参数配置替换原配置
+                    sb.Append("\"").Append(browerInstallPath).Append("\" -- \"%1\"");
+                }
             }
-            else
+            catch (Exception e)
             {
-                // 使用chrome标准的参数配置替换原配置
-                sb.Append("\"").Append(browerInstallPath).Append("\" -- \"%1\"");
+                logger.WriteLog("getDefaultBrowerValue==>发生异常：e：" + e.ToString());
+                return string.Empty;
             }
-
             return sb.ToString();
         }
 
@@ -178,10 +198,9 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("获取默认浏览器发生异常：" + e.ToString());
+                logger.WriteLog("getDefaultBrowerPath==>获取默认浏览器发生异常：" + e.ToString());
                 return string.Empty;
             }
-
 
             return defaultBrowerPath;
         }
@@ -211,7 +230,7 @@ namespace AngleToolHelper
             }
             catch(Exception e)
             {
-                logger.WriteLog("获取谷歌安装路径失败，可能是未安装谷歌浏览器：" + e.ToString());
+                logger.WriteLog("getChromeInstallPath==>获取谷歌安装路径失败，可能是未安装谷歌浏览器：" + e.ToString());
                 return string.Empty;
             }
 

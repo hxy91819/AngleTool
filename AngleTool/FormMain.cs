@@ -1,4 +1,5 @@
 ﻿using AngleToolHelper;
+using Helpers;
 using System;
 using System.Deployment.Application;
 using System.Diagnostics;
@@ -18,11 +19,6 @@ namespace AngleTool
         private string version = "Debug";
 
         /// <summary>
-        /// 当前是否是开发者模式
-        /// </summary>
-        private bool advanceMode = false;
-
-        /// <summary>
         /// 进入开发者模式点击次数统计
         /// </summary>
         private int advanceModeClickCount = 0;
@@ -31,6 +27,11 @@ namespace AngleTool
         /// 满足所有优化状态的时候，按钮显示的文字
         /// </summary>
         private const string BUTTON_FLEX_OPEN_ANGLE_SCHEDULE = "打开天使排班";
+
+        /// <summary>
+        /// 日志工具
+        /// </summary>
+        private static LogHelper logger = new LogHelper();
 
 
         public FormMain()
@@ -60,15 +61,13 @@ namespace AngleTool
             }
             catch (Exception e)
             {
-                normalLog("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
+                logger.WriteLog("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
             }
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            normalLog("Copyright 2018 广州海鹚网络科技有限公司 All Rights Reserved V " + version + "\n");
-
             /*
             advanceLog("欢迎使用！请点击“点我优化”，完成网络优化，您可能需要重启计算机后使优化生效。\n");
             string hint = "注意：由于追加的Hosts配置在文件末尾，查看Hosts配置时，请翻到Hosts末尾查看";
@@ -87,11 +86,6 @@ namespace AngleTool
             timerLazyLoad.Enabled = true;
         }
 
-        private void normalLog(string log)
-        {
-            // 不打印一般性日志
-        }
-
         private void FormMain_Shown(object sender, EventArgs e)
         {
             this.Show();
@@ -105,14 +99,13 @@ namespace AngleTool
             {
                 Process pro = new Process();
                 pro.StartInfo.FileName = "chrome.exe";
-                pro.StartInfo.Arguments = @"https://mch.hoswork.com/mch/index.html#/wxlogin";
+                pro.StartInfo.Arguments = CommonConstant.HIWORK_MCH_LOGIN_PAGE;
                 pro.Start();
             }
             else
             {
                 if (stepAll())
                 {
-                    normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
                     buttonFlex.Enabled = true;
                     buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
                 }
@@ -124,60 +117,55 @@ namespace AngleTool
         private bool stepSetHosts()
         {
             buttonFlex.Enabled = false;
-            normalLog("1/4：准备优化Hosts……");
 
             string result = HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
                 HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
                 HospitalCustomizedConfig.hostsVersion);
             if (!result.Equals(HostModifier.HOSTS_OK) && !result.Equals(HostModifier.HOSTS_ALREADY_OK))
             {
-                normalLog("1/4：" + result);
                 buttonFlex.Enabled = true;
                 return false;
 
             }
-            normalLog("1/4：" + result);
             return true;
         }
 
         private bool stepInstallChrome()
         {
-            normalLog("2/4：检查是否已安装谷歌浏览器……");
-
             if (!BrowerConfiger.hasChromeInstalled())
             {
-                normalLog("2/4：您尚未安装谷歌浏览器，请在弹窗中选择是否下载安装。请于安装后点击按钮继续");
-                // 打开下载窗口
-                FormDownLoadProgressBar formDownLoadProgressBar = new FormDownLoadProgressBar();
-                formDownLoadProgressBar.ShowDialog();
-                buttonFlex.Enabled = true;
+                // 下载完成后，提示用户是否安装
+                MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
+                DialogResult dr = MessageBox.Show("您尚未安装谷歌浏览器，点击确认可下载安装", "谷歌浏览器未安装", messButton);
+                if (dr == DialogResult.OK)//如果点击“确定”按钮
+                {
+                    // 打开下载窗口
+                    FormDownLoadProgressBar formDownLoadProgressBar = new FormDownLoadProgressBar();
+                    formDownLoadProgressBar.ShowDialog();
+                    buttonFlex.Enabled = true;
+                }
                 return false;
             }
 
-            normalLog("2/4：谷歌浏览器已安装");
             return true;
         }
 
         private bool stepSetDefaultBrowser()
         {
             buttonFlex.Enabled = false;
-            normalLog("3/4：设置谷歌浏览器为默认浏览器……");
 
             // 判断当前是否是谷歌浏览器
             if (BrowerConfiger.getDefaultBrowerPath().Contains("chrome"))
             {
-                normalLog("3/4：当前默认浏览器已经是谷歌浏览器");
                 return true;
             }
 
             string setBrowerResult = BrowerConfiger.setDefaultBrower();
             if (!setBrowerResult.Equals(BrowerConfiger.DEFAULT_BROWSER_OK))
             {
-                normalLog("3/4：" + setBrowerResult);
                 buttonFlex.Enabled = true;
                 return false;
             }
-            normalLog("3/4：" + setBrowerResult);
             return true;
         }
 
@@ -210,13 +198,12 @@ namespace AngleTool
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            timerLazyLoad.Enabled = false;
             if (stepAll())
             {
-                normalLog("4/4：优化完成，请点击上方按钮进入天使排班");
                 buttonFlex.Enabled = true;
                 buttonFlex.Text = BUTTON_FLEX_OPEN_ANGLE_SCHEDULE;
             }
-            timerLazyLoad.Enabled = false;
         }
 
         private void labelChromeInstall_Click(object sender, EventArgs e)
@@ -232,6 +219,18 @@ namespace AngleTool
             {
                 advanceModeClickCount++;
             }
+        }
+
+
+        /// <summary>
+        /// 打开错误报告
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabelOpenErrorLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string logPath = logger.getLogPath();
+            System.Diagnostics.Process.Start(logPath);
         }
     }
 }
