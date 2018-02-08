@@ -230,7 +230,19 @@ namespace AngleTool
         private void linkLabelOpenErrorLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string logPath = logger.getLogPath();
-            System.Diagnostics.Process.Start(logPath);
+            try
+            {
+                System.Diagnostics.Process.Start(logPath);
+            }
+            catch (Exception exception)
+            {
+                logger.WriteLog("打开错误报告失败：" + exception.ToString());
+                // 下载完成后，提示用户是否安装
+                MessageBoxButtons messButton = MessageBoxButtons.OK;
+                DialogResult dr = MessageBox.Show("尚未生成错误报告", "错误报告", messButton);
+                return;
+            }
+            
         }
     }
 }

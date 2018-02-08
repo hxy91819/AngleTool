@@ -2,9 +2,9 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
-    <InstallUrlHistory>http://simg.gzhc365.com/hiwork/AngleTool/|http://localhost:8080/|https://www.hoswork.com/</InstallUrlHistory>
+    <InstallUrlHistory>http://file.hz.taeapp.com/clickonce/|http://simg.gzhc365.com/hiwork/AngleTool/|http://localhost:8080/|https://www.hoswork.com/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory>http://simg.gzhc365.com/hiwork/AngleTool/</UpdateUrlHistory>
+    <UpdateUrlHistory>https://mch.hoswork.com/api/file/|http://file.hz.taeapp.com/clickonce/|http://simg.gzhc365.com/hiwork/AngleTool/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>zh-CN</FallbackCulture>

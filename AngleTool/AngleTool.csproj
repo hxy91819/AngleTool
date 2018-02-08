@@ -23,13 +23,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>http://simg.gzhc365.com/hiwork/AngleTool/</UpdateUrl>
+    <UpdateUrl>https://mch.hoswork.com/api/file/AngleTool/</UpdateUrl>
     <TargetCulture>zh-CN</TargetCulture>
     <ProductName>天使排班</ProductName>
     <PublisherName>海鹚科技</PublisherName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

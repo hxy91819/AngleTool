@@ -14,7 +14,7 @@ namespace AngleToolHelper
         private static LogHelper logger = new LogHelper();
 
         public const string DEFAULT_BROWSER_OK = "默认浏览器设置成功";
-        
+
         /// <summary>
         /// 判断是否安装了Chrome
         /// </summary>
@@ -77,7 +77,7 @@ namespace AngleToolHelper
             {
                 logger.WriteLog("downloadChrome==>下载文件发生异常，请稍后再试：e:" + e.ToString());
             }
-            
+
         }
 
         /// <summary>
@@ -104,14 +104,14 @@ namespace AngleToolHelper
 
             // 设置谷歌浏览器为默认浏览器
             StringBuilder sb = new StringBuilder();
-            
+
 
             try
             {
                 RegistryKey root = Registry.ClassesRoot;
                 RegistryKey httpCommand = root.OpenSubKey(@"http\shell\open\command\", true);
                 httpCommand.SetValue(string.Empty, getDefaultBrowerValue(@"http\shell\open\command\", chromeInstallPath, false));
-                
+
                 RegistryKey httpsCommand = root.OpenSubKey(@"https\shell\open\command\", true);
                 httpsCommand.SetValue(string.Empty, getDefaultBrowerValue(@"https\shell\open\command\", chromeInstallPath, false));
 
@@ -154,7 +154,7 @@ namespace AngleToolHelper
                 RegistryKey command = root.OpenSubKey(rootSubKey);
                 string defaultBrowerPath = command.GetValue(string.Empty).ToString();
                 string[] paths = defaultBrowerPath.Split('"');
-                
+
                 if (keepLastParameters)
                 {
                     for (int i = 0; i < paths.Length; i++)
@@ -193,8 +193,29 @@ namespace AngleToolHelper
             try
             {
                 RegistryKey root = Registry.ClassesRoot;
-                RegistryKey command = root.OpenSubKey(@"http\shell\open\command\");
-                defaultBrowerPath = command.GetValue(string.Empty).ToString();
+                // 如果对应的key不存在，则RegistryKey应该为null
+
+                // 尝试获取 http 节点下的默认浏览器配置
+                RegistryKey httpCommand = root.OpenSubKey(@"http\shell\open\command\");
+                if (httpCommand != null)
+                {
+                    return httpCommand.GetValue(string.Empty).ToString();
+                }
+                
+                // 尝试获取 https 节点下的默认浏览器
+                RegistryKey httpsCommand = root.OpenSubKey(@"https\shell\open\command\");
+                if (httpsCommand != null)
+                {
+                    return httpsCommand.GetValue(string.Empty).ToString();
+                }
+
+                // 尝试获取 htmlfile 节点下的默认浏览器
+                RegistryKey htmlFileCommand = root.OpenSubKey(@"https\shell\open\command\");
+                if (htmlFileCommand != null)
+                {
+                    return httpCommand.GetValue(string.Empty).ToString();
+                }
+
             }
             catch (Exception e)
             {
@@ -202,7 +223,7 @@ namespace AngleToolHelper
                 return string.Empty;
             }
 
-            return defaultBrowerPath;
+            return string.Empty;
         }
 
         /// <summary>
@@ -215,20 +236,39 @@ namespace AngleToolHelper
 
             try
             {
+                // 默认从LocalMachine中获取
                 string softName = "chrome";
                 string strKeyName = string.Empty;
                 string softPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\";
+                string subKey = softPath + softName + ".exe";
                 RegistryKey regKey = Registry.LocalMachine;
-                RegistryKey regSubKey = regKey.OpenSubKey(softPath + softName + ".exe", false);
+                RegistryKey regSubKey = regKey.OpenSubKey(subKey, false);
+
+                if (regSubKey == null)
+                {
+                    logger.WriteLog("getChromeInstallPath==>从LocalMachine读取到的注册表键为null，subKey：" + subKey + "；尝试从CurrentUser中获取默认浏览器");
+
+                    // 默认从LocalMachine中获取失败时，尝试从CurrentUser中获取
+                    regKey = Registry.CurrentUser;
+                    softPath = @"Software\Microsoft\Windows\CurrentVersion\App Paths\";
+                    subKey = softPath + softName + ".exe";
+                    regSubKey = regKey.OpenSubKey(subKey, false);
+                    if (regSubKey == null)
+                    {
+                        logger.WriteLog("getChromeInstallPath==>从CurrentUser读取到的注册表键为null，subKey：" + subKey);
+                        return string.Empty;
+                    }
+
+                }
 
                 object objResult = regSubKey.GetValue(strKeyName);
                 RegistryValueKind regValueKind = regSubKey.GetValueKind(strKeyName);
-                if (regValueKind == Microsoft.Win32.RegistryValueKind.String)
+                if (regValueKind == RegistryValueKind.String)
                 {
                     chromeInstallPath = objResult.ToString();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.WriteLog("getChromeInstallPath==>获取谷歌安装路径失败，可能是未安装谷歌浏览器：" + e.ToString());
                 return string.Empty;
