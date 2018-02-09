@@ -31,7 +31,7 @@ namespace AngleTool
         /// <summary>
         /// 日志工具
         /// </summary>
-        log4net.ILog logInfo = log4net.LogManager.GetLogger("FormMain");
+        private log4net.ILog logger = log4net.LogManager.GetLogger("FormMain");
 
         public FormMain()
         {
@@ -60,9 +60,8 @@ namespace AngleTool
             }
             catch (Exception e)
             {
-                logInfo.Info("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
+                logger.Info("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -96,10 +95,21 @@ namespace AngleTool
             buttonFlex.Enabled = false;
             if (buttonFlex.Text.Equals(BUTTON_FLEX_OPEN_ANGLE_SCHEDULE))
             {
-                Process pro = new Process();
-                pro.StartInfo.FileName = "chrome.exe";
-                pro.StartInfo.Arguments = CommonConstant.HIWORK_MCH_LOGIN_PAGE;
-                pro.Start();
+                try
+                {
+                    // 使用指定的浏览器打开
+                    Process pro = new Process();
+                    pro.StartInfo.FileName = "chrome.exe";
+                    pro.StartInfo.Arguments = CommonConstant.HIWORK_MCH_LOGIN_PAGE;
+                    pro.Start();
+                }
+                catch (Exception excetpion)
+                {
+                    logger.Error("使用谷歌浏览器打开失败，可能是手工转移了Chrome安装目录", excetpion);
+                    MessageBoxButtons messButton = MessageBoxButtons.OK;
+                    DialogResult dr = MessageBox.Show("抱歉，使用谷歌浏览器打开天使排班失败。请打开浏览器，输入网址：www.hoswork.com，点击右上角“后台登录”", "提示信息", messButton);
+                    return;
+                }
             }
             else
             {
@@ -141,6 +151,11 @@ namespace AngleTool
                     // 打开下载窗口
                     FormDownLoadProgressBar formDownLoadProgressBar = new FormDownLoadProgressBar();
                     formDownLoadProgressBar.ShowDialog();
+                    buttonFlex.Enabled = true;
+                }
+                else
+                {
+                    // 选择取消的时候，需要释放按钮
                     buttonFlex.Enabled = true;
                 }
                 return false;
@@ -228,14 +243,24 @@ namespace AngleTool
         /// <param name="e"></param>
         private void linkLabelOpenErrorLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string logPath = logger.getLogPath();
+            string logPath = @".\Log\";
             try
             {
-                System.Diagnostics.Process.Start(logPath);
+                if (Directory.Exists(logPath))
+                {
+                    System.Diagnostics.Process.Start(logPath);
+                }
+                else
+                {
+                    // 下载完成后，提示用户是否安装
+                    MessageBoxButtons messButton = MessageBoxButtons.OK;
+                    DialogResult dr = MessageBox.Show("尚未生成错误报告", "错误报告", messButton);
+                    return;
+                }
             }
             catch (Exception exception)
             {
-                logInfo.Info("打开错误报告失败：" + exception.ToString());
+                logger.Info("打开错误报告失败：" + exception.ToString());
                 // 下载完成后，提示用户是否安装
                 MessageBoxButtons messButton = MessageBoxButtons.OK;
                 DialogResult dr = MessageBox.Show("尚未生成错误报告", "错误报告", messButton);

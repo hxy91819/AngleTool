@@ -11,7 +11,10 @@ namespace AngleToolHelper
     /// </summary>
     public static class BrowerConfiger
     {
-        private static LogHelper logger = new LogHelper();
+        /// <summary>
+        /// 日志工具
+        /// </summary>
+        private static log4net.ILog logger = log4net.LogManager.GetLogger("BrowerConfiger");
 
         public const string DEFAULT_BROWSER_OK = "默认浏览器设置成功";
 
@@ -21,6 +24,7 @@ namespace AngleToolHelper
         /// <returns></returns>
         public static Boolean hasChromeInstalled()
         {
+            logger.Info("test");
             try
             {
                 RegistryKey rk = Registry.CurrentUser;
@@ -51,7 +55,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("hasChromeInstalled==>发生异常：" + e.ToString());
+                logger.Error("hasChromeInstalled==>发生异常：", e);
                 return false;
             }
 
@@ -75,7 +79,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("downloadChrome==>下载文件发生异常，请稍后再试：e:" + e.ToString());
+                logger.Error("downloadChrome==>下载文件发生异常，请稍后再试：e:",e );
             }
 
         }
@@ -88,7 +92,7 @@ namespace AngleToolHelper
             /*
             if (defalutBrowerPath.Contains("chrome.exe") || defalutBrowerPath.Equals(string.Empty))
             {
-                logger.WriteLog("默认浏览器已经是Chrome");
+                logInfo.Info("默认浏览器已经是Chrome");
                 // 如果默认默认浏览器是谷歌浏览器，则直接退出
                 return "未设置：默认浏览器已经是Chrome";
             }
@@ -97,7 +101,7 @@ namespace AngleToolHelper
             string chromeInstallPath = getChromeInstallPath();
             if (chromeInstallPath.Equals(string.Empty))
             {
-                logger.WriteLog("获取Chrome安装路径失败，可能未安装Chrome");
+                logger.Error("获取Chrome安装路径失败，可能未安装Chrome");
                 // 如果无法获取谷歌浏览器安装地址，直接退出
                 return "未设置：" + "获取Chrome安装路径失败，可能未安装Chrome";
             }
@@ -120,7 +124,8 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("setDefaultBrower==>设置默认浏览器发生异常：" + e.ToString());
+                logger.Error("setDefaultBrower==>设置默认浏览器发生异常：", e);
+                return "发生异常";
             }
 
             return DEFAULT_BROWSER_OK;
@@ -181,7 +186,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("getDefaultBrowerValue==>发生异常：e：" + e.ToString());
+                logger.Error("getDefaultBrowerValue==>发生异常：e：", e);
                 return string.Empty;
             }
             return sb.ToString();
@@ -219,7 +224,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("getDefaultBrowerPath==>获取默认浏览器发生异常：" + e.ToString());
+                logger.Error("getDefaultBrowerPath==>获取默认浏览器发生异常：",e);
                 return string.Empty;
             }
 
@@ -246,7 +251,7 @@ namespace AngleToolHelper
 
                 if (regSubKey == null)
                 {
-                    logger.WriteLog("getChromeInstallPath==>从LocalMachine读取到的注册表键为null，subKey：" + subKey + "；尝试从CurrentUser中获取默认浏览器");
+                    logger.Info("getChromeInstallPath==>从LocalMachine读取到的注册表键为null，subKey：" + subKey + "；尝试从CurrentUser中获取默认浏览器");
 
                     // 默认从LocalMachine中获取失败时，尝试从CurrentUser中获取
                     regKey = Registry.CurrentUser;
@@ -255,7 +260,7 @@ namespace AngleToolHelper
                     regSubKey = regKey.OpenSubKey(subKey, false);
                     if (regSubKey == null)
                     {
-                        logger.WriteLog("getChromeInstallPath==>从CurrentUser读取到的注册表键为null，subKey：" + subKey);
+                        logger.Info("getChromeInstallPath==>从CurrentUser读取到的注册表键为null，subKey：" + subKey);
                         return string.Empty;
                     }
 
@@ -270,7 +275,7 @@ namespace AngleToolHelper
             }
             catch (Exception e)
             {
-                logger.WriteLog("getChromeInstallPath==>获取谷歌安装路径失败，可能是未安装谷歌浏览器：" + e.ToString());
+                logger.Error("getChromeInstallPath==>获取谷歌安装路径失败，可能是未安装谷歌浏览器：",e);
                 return string.Empty;
             }
 

@@ -13,7 +13,7 @@ namespace AngleTool
     public partial class FormDownLoadProgressBar : Form
     {
         /// <summary>
-        /// 下载状态：0，未下载完成；1，下载完成；2，用户取消；4，用户确认安装
+        /// 下载状态：0，未下载完成；1，下载完成；2，用户取消；3，下载失败；4，用户确认安装
         /// </summary>
         private static int downloadStatus = 0;
         public FormDownLoadProgressBar()
@@ -42,7 +42,7 @@ namespace AngleTool
         private void cancelDownload()
         {
             // 如果状态已经是2了，则不需要再弹窗确认
-            if(downloadStatus == 2 || downloadStatus == 4)
+            if(downloadStatus == 2 || downloadStatus == 4 || downloadStatus == 3)
             {
                 return;
             }
@@ -133,6 +133,7 @@ namespace AngleTool
                 DialogResult dr = MessageBox.Show("谷歌浏览器下载失败，请您稍后再试", "下载失败", messButton);
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
+                    downloadStatus = 3;
                     this.Close();
                 }
             }
@@ -149,6 +150,7 @@ namespace AngleTool
                 }
                 else//如果点击“取消”按钮
                 {
+                    downloadStatus = 2;
                     this.Close();
                 }
             }

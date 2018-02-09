@@ -19,6 +19,11 @@ namespace AngleTool
         /// </summary>
         private const string BUTTON_FLEX_OPEN_ANGLE_SCHEDULE = "打开天使排班";
 
+        /// <summary>
+        /// 日志工具
+        /// </summary>
+        private log4net.ILog logger = log4net.LogManager.GetLogger("FormAdvance");
+
         public FormAdvance()
         {
             InitializeComponent();
@@ -39,11 +44,22 @@ namespace AngleTool
 
         private void buttonOpenBrowser_Click(object sender, EventArgs e)
         {
-            // 使用指定的浏览器打开
-            Process pro = new Process();
-            pro.StartInfo.FileName = "chrome.exe";
-            pro.StartInfo.Arguments = CommonConstant.HIWORK_MCH_LOGIN_PAGE;
-            pro.Start();
+            try
+            {
+                // 使用指定的浏览器打开
+                Process pro = new Process();
+                pro.StartInfo.FileName = "chrome.exe";
+                pro.StartInfo.Arguments = CommonConstant.HIWORK_MCH_LOGIN_PAGE;
+                pro.Start();
+            }
+            catch (Exception excetpion)
+            {
+                logger.Error("使用谷歌浏览器打开失败，可能是手工转移了Chrome安装目录", excetpion);
+                MessageBoxButtons messButton = MessageBoxButtons.OK;
+                DialogResult dr = MessageBox.Show("抱歉，使用谷歌浏览器打开天使排班失败。请打开浏览器，输入网址：www.hoswork.com，点击右上角“后台登录”", "提示信息", messButton);
+                return;
+            }
+
 
             // 使用默认浏览器打开
             //System.Diagnostics.Process.Start(CommonConstant.HIWORK_MCH_LOGIN_PAGE);
