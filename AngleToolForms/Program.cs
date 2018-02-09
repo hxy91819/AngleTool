@@ -14,6 +14,8 @@ namespace AngleToolForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // 本工程只保存公共调用的窗体，不做启动工程使用。
             //            Application.Run(new Form1());
         }
     }

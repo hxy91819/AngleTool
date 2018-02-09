@@ -86,6 +86,11 @@ namespace AngleToolHelper
         /// <returns></returns>
         public static String optiHosts(string[] optiHosts, string regionStart, string regionEnd, string hostsVersion)
         {
+            if (hostsVersion.Equals(string.Empty))
+            {
+                return HOSTS_ALREADY_OK;
+            }
+
             if (optiHosts.Length == 0)
             {
                 return "待优化hosts为空，系统错误，优化失败";

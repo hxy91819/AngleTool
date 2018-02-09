@@ -25,6 +25,9 @@ namespace AngleTool
 
         /// <summary>
         /// Hosts版本
+        /// 
+        /// 不需要优化的版本，此项置空
+        /// 
         /// </summary>
         public static string hostsVersion = "";
 
@@ -40,8 +43,8 @@ namespace AngleTool
                     regionEnd };
 
         /// <summary>
-        /// 粤北版本
+        /// 通用版本
         /// </summary>
-        public static string version = "1.2.3 佛一";
+        public static string version = "1.2.3";
     }
 }
