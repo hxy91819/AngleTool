@@ -1,5 +1,4 @@
-﻿using Helpers;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,9 +11,9 @@ namespace AngleToolHelper
     public static class SystemConfiger
     {
         /// <summary>
-        /// 创建日志记录器
+        /// 日志工具
         /// </summary>
-        private static LogHelper logger = new LogHelper(false);
+        private static log4net.ILog logger = log4net.LogManager.GetLogger("SystemConfiger");
 
         /// <summary>
         /// 从ClickOnce的开始菜单创建桌面快捷方式
@@ -32,11 +31,10 @@ namespace AngleToolHelper
 
             path += @"海鹚科技";
 
-            logger.WriteLog("开始菜单目录path：" + path);
 
             if (!System.IO.Directory.Exists(path))
             {
-                logger.WriteLog("开始菜单目录未找到path：" + path);
+                logger.ErrorFormat("没有找到开始菜单:{1}", path);
                 return;
             }
 

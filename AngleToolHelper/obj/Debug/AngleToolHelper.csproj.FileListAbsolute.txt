@@ -14,8 +14,6 @@ E:\csharpcode\AngleTool\ClassLibrary1\obj\Debug\AngleToolHelper.dll
 E:\csharpcode\AngleTool\ClassLibrary1\obj\Debug\AngleToolHelper.pdb
 E:\csharpcode\AngleTool\AngleToolHelper\bin\Debug\AngleToolHelper.dll
 E:\csharpcode\AngleTool\AngleToolHelper\bin\Debug\AngleToolHelper.pdb
-E:\csharpcode\AngleTool\AngleToolHelper\bin\Debug\Helpers.dll
-E:\csharpcode\AngleTool\AngleToolHelper\bin\Debug\Helpers.pdb
 E:\csharpcode\AngleTool\AngleToolHelper\obj\Debug\AngleToolHelper.csprojResolveAssemblyReference.cache
 E:\csharpcode\AngleTool\AngleToolHelper\obj\Debug\AngleToolHelper.dll
 E:\csharpcode\AngleTool\AngleToolHelper\obj\Debug\AngleToolHelper.pdb

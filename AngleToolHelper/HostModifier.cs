@@ -1,5 +1,4 @@
-﻿using Helpers;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,9 +13,9 @@ namespace AngleToolHelper
     {
 
         /// <summary>
-        /// 创建日志记录器
+        /// 日志工具
         /// </summary>
-        private static LogHelper logger = new LogHelper(false);
+        private static log4net.ILog logger = log4net.LogManager.GetLogger("HostModifier");
 
         /// <summary>
         /// Hosts临时目录文件
@@ -72,6 +71,7 @@ namespace AngleToolHelper
             }
             catch (Exception exception)
             {
+                logger.Error(exception);
                 return "还原发生异常，请在管理员模式下启动本程序！" + "\n" + "详细信息：" + exception.ToString();
             }
         }
@@ -126,6 +126,7 @@ namespace AngleToolHelper
             }
             catch (Exception exception)
             {
+                logger.Error(exception);
                 return "发生异常，请在管理员模式下启动本程序！" + "\n" + "详细信息：" + exception.ToString();
             }
         }
@@ -164,8 +165,9 @@ namespace AngleToolHelper
                 // 备份一份清理过的hosts
                 File.Copy(tempHostsFileName, tempHostsBakFileName, true);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                logger.Error(exception);
                 // 通常是因为没有启动管理员模式
                 return false;
             }

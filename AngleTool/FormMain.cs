@@ -1,5 +1,4 @@
 ﻿using AngleToolHelper;
-using Helpers;
 using System;
 using System.Deployment.Application;
 using System.Diagnostics;

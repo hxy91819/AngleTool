@@ -1,5 +1,4 @@
-﻿using Helpers;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +23,6 @@ namespace AngleToolHelper
         /// <returns></returns>
         public static Boolean hasChromeInstalled()
         {
-            logger.Info("test");
             try
             {
                 RegistryKey rk = Registry.CurrentUser;
@@ -63,28 +61,6 @@ namespace AngleToolHelper
         }
 
         /// <summary>
-        /// 下载谷歌浏览器
-        /// </summary>
-        public static void downloadChrome()
-        {
-            // 本地文件地址
-            string localFile = CommonConstant.TEMP_HIWORK_PATH + @"\google-chrome.exe";
-
-            // 适合xp的最低级版本的chrome
-            string webFile = @"http://p0xytndy5.bkt.clouddn.com/%E5%A4%A9%E4%BD%BF%E6%8E%92%E7%8F%AD%E4%B8%93%E5%B1%9E%20google-chrome%20%E6%B5%8F%E8%A7%88%E5%99%A8.exe";
-
-            try
-            {
-                HttpHelper.DownloadFile(localFile, webFile);
-            }
-            catch (Exception e)
-            {
-                logger.Error("downloadChrome==>下载文件发生异常，请稍后再试：e:",e );
-            }
-
-        }
-
-        /// <summary>
         /// 设置默认浏览器
         /// </summary>
         public static string setDefaultBrower()
@@ -114,13 +90,31 @@ namespace AngleToolHelper
             {
                 RegistryKey root = Registry.ClassesRoot;
                 RegistryKey httpCommand = root.OpenSubKey(@"http\shell\open\command\", true);
-                httpCommand.SetValue(string.Empty, getDefaultBrowerValue(@"http\shell\open\command\", chromeInstallPath, false));
+                if(httpCommand == null)
+                {
+                    logger.Info("httpCommand未配置");
+                } else
+                {
+                    httpCommand.SetValue(string.Empty, getDefaultBrowerValue(@"http\shell\open\command\", chromeInstallPath, false));
+                }
 
                 RegistryKey httpsCommand = root.OpenSubKey(@"https\shell\open\command\", true);
-                httpsCommand.SetValue(string.Empty, getDefaultBrowerValue(@"https\shell\open\command\", chromeInstallPath, false));
+                if(httpsCommand == null)
+                {
+                    logger.Info("httpsCommand未配置");
+                } else
+                {
+                    httpsCommand.SetValue(string.Empty, getDefaultBrowerValue(@"https\shell\open\command\", chromeInstallPath, false));
+                }
 
                 RegistryKey htmlFilecommand = root.OpenSubKey(@"htmlfile\shell\open\command\", true);
-                htmlFilecommand.SetValue(string.Empty, getDefaultBrowerValue(@"htmlfile\shell\open\command\", chromeInstallPath, false));
+                if(htmlFilecommand == null)
+                {
+                    logger.Info("htmlFilecommand未配置");
+                } else
+                {
+                    htmlFilecommand.SetValue(string.Empty, getDefaultBrowerValue(@"htmlfile\shell\open\command\", chromeInstallPath, false));
+                }
             }
             catch (Exception e)
             {
