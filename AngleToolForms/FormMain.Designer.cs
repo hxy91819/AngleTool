@@ -1,6 +1,6 @@
 ﻿using System.Deployment.Application;
 
-namespace AngleTool
+namespace AngleToolForms
 {
     partial class FormMain
     {

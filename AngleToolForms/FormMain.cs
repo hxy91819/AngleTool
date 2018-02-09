@@ -6,11 +6,44 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace AngleTool
+namespace AngleToolForms
 {
     public partial class FormMain : Form
     {
+        private HospitalCustomized hospitalCutomized;
 
+        public FormMain(HospitalCustomized hospitalCutomized)
+        {
+            InitializeComponent();
+            this.hospitalCutomized = hospitalCutomized;
+
+            /* 2018-02-02 使用ClickOne发布，无法用管理员模式启动。使用Process方法开启管理员后，此方法将无法获取版本。
+try
+{
+    // 获取当前部署
+    ApplicationDeployment appd = ApplicationDeployment.CurrentDeployment;
+    // 取得版本号
+    version = appd.CurrentVersion.ToString();
+}
+catch(InvalidDeploymentException)
+{
+    // 调试模式下启动，会报异常，将此异常抛出
+    richTextBoxLog.AppendText("【您是在调试模式下启动本程序】" + "\n");
+}
+*/
+
+            version = hospitalCutomized.Version;
+
+            try
+            {
+                // 创建桌面快捷方式
+                SystemConfiger.CreateDesktopShortCut();
+            }
+            catch (Exception e)
+            {
+                logger.Info("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
+            }
+        }
 
         /// <summary>
         /// 程序发布版本：默认为Debug
@@ -31,37 +64,6 @@ namespace AngleTool
         /// 日志工具
         /// </summary>
         private log4net.ILog logger = log4net.LogManager.GetLogger("FormMain");
-
-        public FormMain()
-        {
-            InitializeComponent();
-
-            /* 2018-02-02 使用ClickOne发布，无法用管理员模式启动。使用Process方法开启管理员后，此方法将无法获取版本。
-            try
-            {
-                // 获取当前部署
-                ApplicationDeployment appd = ApplicationDeployment.CurrentDeployment;
-                // 取得版本号
-                version = appd.CurrentVersion.ToString();
-            }
-            catch(InvalidDeploymentException)
-            {
-                // 调试模式下启动，会报异常，将此异常抛出
-                richTextBoxLog.AppendText("【您是在调试模式下启动本程序】" + "\n");
-            }
-            */
-            version = HospitalCustomizedConfig.version;
-
-            try
-            {
-                // 创建桌面快捷方式
-                SystemConfiger.CreateDesktopShortCut();
-            }
-            catch (Exception e)
-            {
-                logger.Info("创建桌面快捷方式失败！" + "\n" + "异常信息：" + e.ToString());
-            }
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -126,9 +128,9 @@ namespace AngleTool
         {
             buttonFlex.Enabled = false;
 
-            string result = HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
-                HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
-                HospitalCustomizedConfig.hostsVersion);
+            string result = HostModifier.optiHosts(hospitalCutomized.HostsForAdd,
+                hospitalCutomized.RegionStart, hospitalCutomized.RegionEnd,
+                hospitalCutomized.HostsVersion);
             if (!result.Equals(HostModifier.HOSTS_OK) && !result.Equals(HostModifier.HOSTS_ALREADY_OK))
             {
                 buttonFlex.Enabled = true;
@@ -185,7 +187,7 @@ namespace AngleTool
         private bool stepAll()
         {
             // 如果没有配置hosts版本，表示不需要更新hosts
-            if (!HospitalCustomizedConfig.hostsVersion.Equals(string.Empty))
+            if (!hospitalCutomized.HostsVersion.Equals(string.Empty))
             {
                 if (!stepSetHosts())
                 {
@@ -230,10 +232,10 @@ namespace AngleTool
         private void labelChromeInstall_Click(object sender, EventArgs e)
         {
             // 如果点击了5次，则打开高级模式
-            if(advanceModeClickCount == 5)
+            if (advanceModeClickCount == 5)
             {
                 advanceModeClickCount = 0;
-                FormAdvance formAdvance = new FormAdvance();
+                FormAdvance formAdvance = new FormAdvance(hospitalCutomized);
                 formAdvance.ShowDialog();
             }
             else
@@ -273,7 +275,7 @@ namespace AngleTool
                 DialogResult dr = MessageBox.Show("尚未生成错误报告", "错误报告", messButton);
                 return;
             }
-            
+
         }
     }
 }

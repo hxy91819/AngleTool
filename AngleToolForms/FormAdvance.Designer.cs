@@ -1,4 +1,4 @@
-﻿namespace AngleTool
+﻿namespace AngleToolForms
 {
     partial class FormAdvance
     {

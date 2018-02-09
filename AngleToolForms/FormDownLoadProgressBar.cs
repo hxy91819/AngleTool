@@ -8,10 +8,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AngleTool
+namespace AngleToolForms
 {
     public partial class FormDownLoadProgressBar : Form
     {
+
         /// <summary>
         /// 下载状态：0，未下载完成；1，下载完成；2，用户取消；3，下载失败；4，用户确认安装
         /// </summary>

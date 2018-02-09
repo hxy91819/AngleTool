@@ -1,4 +1,5 @@
-﻿using AngleToolHelper;
+﻿using AngleToolForms;
+using AngleToolHelper;
 using System;
 using System.Deployment.Application;
 using System.Diagnostics;
@@ -6,13 +7,21 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace AngleTool
+namespace AngleToolForms
 {
     /// <summary>
     /// 开发者模式窗口
     /// </summary>
     public partial class FormAdvance : Form
     {
+
+        private HospitalCustomized hospitalCutomized;
+
+        public FormAdvance(HospitalCustomized hospitalCutomized)
+        {
+            InitializeComponent();
+            this.hospitalCutomized = hospitalCutomized;
+        }
 
         /// <summary>
         /// 满足所有优化状态的时候，按钮显示的文字
@@ -24,16 +33,11 @@ namespace AngleTool
         /// </summary>
         private log4net.ILog logger = log4net.LogManager.GetLogger("FormAdvance");
 
-        public FormAdvance()
-        {
-            InitializeComponent();
-        }
-
         private void btnOpti_Click(object sender, EventArgs e)
         {
-            advanceLog(HostModifier.optiHosts(HospitalCustomizedConfig.hostsForAdd,
-    HospitalCustomizedConfig.regionStart, HospitalCustomizedConfig.regionEnd,
-    HospitalCustomizedConfig.hostsVersion));
+            advanceLog(HostModifier.optiHosts(hospitalCutomized.HostsForAdd,
+    hospitalCutomized.RegionStart, hospitalCutomized.RegionEnd,
+    hospitalCutomized.HostsVersion));
         }
 
         private void richTextBoxAdvance_TextChanged(object sender, EventArgs e)

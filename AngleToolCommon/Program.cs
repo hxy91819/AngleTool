@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
+using AngleToolForms;
 
 namespace AngleTool
 {
@@ -49,7 +50,15 @@ namespace AngleTool
                 // We are running as administrator
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FormMain());
+
+                // 增加配置
+                HospitalCustomized config = new HospitalCustomized();
+                config.HostsForAdd = HospitalCustomizedConfig.hostsForAdd;
+                config.HostsVersion = HospitalCustomizedConfig.hostsVersion;
+                config.RegionEnd = HospitalCustomizedConfig.regionEnd;
+                config.RegionStart = HospitalCustomizedConfig.regionStart;
+                config.Version = HospitalCustomizedConfig.version;
+                Application.Run(new AngleToolForms.FormMain(config));
             }
         }
     }
