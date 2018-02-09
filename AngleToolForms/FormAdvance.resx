@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
+        AACYxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jE
+        Ev+axRf/mMQT/5jEE/+YxBT/msUX/5rFF/+axRf/msUX/5rFF/+axRf/msUX/5rFF/+axRf/msUX/5jE
+        FP+YxBL/msUX/5jEE/+YxBT/l8MQ/5HAAv+QvwH/j78A/5C/Af+RwAL/kMAC/4+/AP+QwAL/kcAC/5HA
+        Av+XwxH/mMQT/5rFF/+YxBT/l8MQ/5/IIv/D3Xf/yOCB/87jkP/I34H/xN14/8Xeev/N4oz/xd57/8Xe
+        ev/E3Xf/nscg/5bDD/+axRj/mcUW/5PBCP+v0Uf///////D23P/J4IP/8Pfd///////8/fj/3eyy//v9
+        9////////////67QRP+TwQj/m8YZ/5nFFv+TwQj/r9FI///////z+OP/2Omm//P45P//////udde/5rF
+        GP+31ln//f78//////+t0ET/k8EI/5vGGf+ZxRb/k8EI/6/RR///////7PTS/7vYZP/0+eX/y+GI/7nX
+        Xv//////vNlm/7LTTv//////rtFF/5PBB/+bxhn/mcUW/5PBCP+v0Uj///////b66//i7rv/+fvx//H3
+        3//2+ur//v/9//////+62GH/yeCD/7XVVv+SwAX/m8YZ/5nFFv+TwQj/r9FH///////q887/tdVV//D2
+        3P/m8cb/s9RR//L34P///////P34//v99v+u0Ub/k8EH/5vGGf+ZxRb/lMIJ/63QQv/0+ef/8/ji//T5
+        5v/y9+D/8vfh//L34f/y9+H/9Pnm//P44//2+ur/q88+/5TCCf+bxhn/mcUV/5TCCv+qzz3/6/TS/+Lu
+        vP/a6qr/6fLN/+fxyP/n8cj/6fPN/9vqrf/g7bj/6vPQ/6nOOf+Uwgr/m8UZ/5nEFf+Vwg3/pMsv/+bx
+        xv/Y6ab/wtx0/+nyzf/j78D/4++//+nzzv/G3nz/1Oac/+bxxv+iyiv/lcIN/5rFGP+YxBP/mMQU/5bD
+        D/+RwAL/k8EH/5TCCv+RwAP/ksAE/5LABP+RwAP/lMIK/5PBCP+RwAL/lsMP/5jEE/+axRf/mMQT/5jE
+        E/+YxBT/mcUW/5nFFf+ZxBX/mcUW/5nFFv+ZxRb/mcUW/5nEFf+ZxRX/mcUW/5jEFP+YxBL/msUX/5jE
+        E/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQS/5rF
+        F/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jEE/+YxBP/mMQT/5jE
+        Ev+axRf/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAA==
+</value>
+  </data>
 </root>

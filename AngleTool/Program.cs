@@ -38,8 +38,7 @@ namespace AngleTool
                 catch (Exception)
                 {
                     // The user did not allow the application to run as administrator
-                    MessageBox.Show("Sorry, but I don't seem to be able to start " +
-                       "this program with administrator rights!");
+                    MessageBox.Show("抱歉，程序无法以管理员模式启动，退出中……");
                 }
 
                 // Shut down the current process

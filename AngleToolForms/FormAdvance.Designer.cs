@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdvance));
             this.panelCenter = new System.Windows.Forms.Panel();
             this.richTextBoxAdvance = new System.Windows.Forms.RichTextBox();
             this.buttonReduction = new System.Windows.Forms.Button();
@@ -168,6 +169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 393);
             this.Controls.Add(this.panelCenter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAdvance";
