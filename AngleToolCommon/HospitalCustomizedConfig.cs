@@ -26,7 +26,7 @@ namespace AngleTool
         /// <summary>
         /// Hosts版本
         /// </summary>
-        public static string hostsVersion = "# angle-schedule-yuebei V1.0.0";
+        public static string hostsVersion = "";
 
         /// <summary>
         /// 个性化的Hosts配置
@@ -42,6 +42,6 @@ namespace AngleTool
         /// <summary>
         /// 粤北版本
         /// </summary>
-        public static string version = "1.2.3 粤北";
+        public static string version = "1.2.3 佛一";
     }
 }

@@ -184,13 +184,21 @@ namespace AngleTool
 
         private bool stepAll()
         {
-            if (!stepSetHosts())
+            // 如果没有配置hosts版本，表示不需要更新hosts
+            if (!HospitalCustomizedConfig.hostsVersion.Equals(string.Empty))
             {
-                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
-                return false;
-            }
+                if (!stepSetHosts())
+                {
+                    labelHostsInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
+                    return false;
+                }
 
-            labelHostsInfo.Text = CommonConstant.LABEL_SHOW_OK;
+                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_OK;
+            }
+            else
+            {
+                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_SKIP;
+            }
 
             if (!stepInstallChrome())
             {

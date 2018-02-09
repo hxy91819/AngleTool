@@ -35,5 +35,10 @@ namespace AngleToolHelper
         /// 标签展示错
         /// </summary>
         public static string LABEL_SHOW_FAIL = "×";
+
+        /// <summary>
+        /// 标签展示：跳过
+        /// </summary>
+        public static string LABEL_SHOW_SKIP = "不需要";
     }
 }

@@ -184,13 +184,21 @@ namespace AngleTool
 
         private bool stepAll()
         {
-            if (!stepSetHosts())
+            // 如果没有配置hosts版本，表示不需要更新hosts
+            if (!HospitalCustomizedConfig.hostsVersion.Equals(string.Empty))
             {
-                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
-                return false;
-            }
+                if (!stepSetHosts())
+                {
+                    labelHostsInfo.Text = CommonConstant.LABEL_SHOW_FAIL;
+                    return false;
+                }
 
-            labelHostsInfo.Text = CommonConstant.LABEL_SHOW_OK;
+                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_OK;
+            }
+            else
+            {
+                labelHostsInfo.Text = CommonConstant.LABEL_SHOW_SKIP;
+            }
 
             if (!stepInstallChrome())
             {
@@ -222,7 +230,7 @@ namespace AngleTool
         private void labelChromeInstall_Click(object sender, EventArgs e)
         {
             // 如果点击了5次，则打开高级模式
-            if(advanceModeClickCount == 5)
+            if (advanceModeClickCount == 5)
             {
                 advanceModeClickCount = 0;
                 FormAdvance formAdvance = new FormAdvance();
@@ -265,7 +273,7 @@ namespace AngleTool
                 DialogResult dr = MessageBox.Show("尚未生成错误报告", "错误报告", messButton);
                 return;
             }
-            
+
         }
     }
 }
